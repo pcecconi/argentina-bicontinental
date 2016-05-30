@@ -11,6 +11,32 @@ MAP
     SHAPEPATH '../data/'
 	SYMBOLSET "symbols.txt"
     FONTSET 'fonts.txt'
+    
+    WEB
+        IMAGEPATH "/dev/shm/"
+        IMAGEURL "/ms_tmp/"
+        METADATA
+        "wms_onlineresource"	""
+        "ows_attribution_title"	""
+        "ows_encoding"	"UTF-8"
+        "mg_baselayerurl"	"http://192.168.1.7/mapcache/tms/1.0.0/world_borders@GoogleMapsCompatible/{z}/{x}/{y}.png"
+        "ows_abstract"	"Sin descripción"
+        "ows_enable_request"	"*"
+        "mg_onlineresource"	""
+        "ows_contactorganization"	""
+        "mg_siteurl"	"http://192.168.1.7/"
+        "ows_srs"	"epsg:3857 epsg:4326"
+        "labelcache_map_edge_buffer"	"-10"
+        "ows_title"	"World Borders"
+        "wfs_getfeature_formatlist"	"geojson,shapezip,csv"
+        "mg_mapid"	"world_borders"
+        "mg_tmsbaselayer"	"True"
+        END # METADATA
+        TEMPLATE "templates/mapa-interactivo.html"
+        VALIDATION
+        "TEMPLATE"	"[a-z/.]+"
+        END # VALIDATION
+    END # WEB
     WEB
         METADATA
             "ows_title" "World Borders"

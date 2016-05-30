@@ -1,4 +1,4 @@
-<VirtualHost *:8080>
+<VirtualHost *:8081>
 	ServerAdmin webmaster@localhost
 
 	SetEnv "MAPCACHE_CONFIG_FILE" "/path/to/your/mapcache/mapcache.xml"

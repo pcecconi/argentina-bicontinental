@@ -129,17 +129,19 @@ mg.MapApp = (function() {
                         continuousWorld: true
                     });
 
-                    var layer = L.tileLayer(c.onlineresource, {
-                        attribution: '<b>Fuente:</b> '+c.attribution,
-                        tms: true,
-                        continuousWorld: true
-                    }).addTo(mapa);
-
+                    if (c.onlineresource!="") {
+                        var layer = L.tileLayer(c.onlineresource, {
+                            attribution: '<b>Fuente:</b> '+c.attribution,
+                            tms: true,
+                            continuousWorld: true
+                        }).addTo(mapa);
+                    }
+                    
                     L.control.scale({imperial: false}).addTo(mapa);
-
+/*
                     mapa.addControl(new mg.Abstract(c, '<p class="legend_title">Referencias</p>\
 <img src="/media/'+c.mapid+'_legend.png?t='+Math.floor(Math.random()*100001)+'"/>', { abstract: (params.abstract && params.abstract != 0), title: (params.title && params.title != 0), minimized: (params.refs && params.refs == 0) }));
-
+*/
                     var miniMap = new L.Control.MiniMap(ref_layer, { toggleDisplay: true, minimized: true }).addTo(mapa);
                     
                     mapa.on('click', onContextMenu, this);

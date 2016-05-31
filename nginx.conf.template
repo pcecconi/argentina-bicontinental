@@ -24,7 +24,7 @@ server {
     # }
     
     location ~ /mapas/(?<map_id>[a-z_-]*)/ {
-        proxy_pass http://127.0.0.1:8081/cgi-bin/mapserv?map=/usr/local/smn/argentina-bicontinental/mapfiles/$map_id.map&mode=browse&layers=all;
+        proxy_pass http://127.0.0.1:8081/cgi-bin/mapserv?map=/path/to/mapfiles/$map_id.map&mode=browse&layers=all;
 	    proxy_set_header Host $host;
         proxy_redirect off;
     }

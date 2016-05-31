@@ -144,7 +144,7 @@ mg.MapApp = (function() {
 */
                     var miniMap = new L.Control.MiniMap(ref_layer, { toggleDisplay: true, minimized: true }).addTo(mapa);
                     
-                    mapa.on('click', onContextMenu, this);
+                    // mapa.on('click', onContextMenu, this);
 
                     // Esto es para evitar que los clicks sobre los elementos flotantes sobre el
                     // mapa sean capturados por el mapa y generen movimientos no previstos        

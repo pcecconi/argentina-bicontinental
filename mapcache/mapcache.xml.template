@@ -77,6 +77,17 @@
 	   <resolutions>44140.625 22070.3125 11035.15625 5517.578125 2758.7890625 1379.39453125 689.697265625 344.848632813 172.424316406 86.212158203 43.106079102 21.553039551 10.776519775</resolutions>
 	</grid>
 
+	<grid name="argentina-bicontinental">
+	   <metadata>
+	     <title>Argentina Bicontinental</title>
+	   </metadata>
+	   <extent>-8500000 -6000000 8500000 5000000</extent>
+	   <srs>SR-ORG:8233</srs>
+	   <units>m</units>
+	   <size>256 256</size>
+	   <resolutions>66406.25 33203.125 16601.5625 8300.78125 4150.390625 2075.1953125 1037.59765625 518.798828125 259.399414063 129.699707031 64.849853516 32.424926758 16.212463379</resolutions>
+	</grid>
+
    <cache name="disk" type="disk">
       <base>/tmp</base>
       <symlink_blank />

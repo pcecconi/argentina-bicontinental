@@ -28,26 +28,22 @@ def gen_preview(mapa):
 	call('convert '+mapa_grande+' -resize 33% '+os.path.join(preview_dir, mapa+'.png'), shell=True)
 
 def remove(maps):
-	try:
-		with simpleflock.SimpleFlock(MAPCACHE_CONFIG, timeout=15):
-			tree = ET.parse(MAPCACHE_CONFIG)
-			root = tree.getroot()
-			for mapa in maps:
-				elems = root.findall("*[@name='"+mapa+"']")
-				if len(elems) > 0:
-					for child in elems:
-						root.remove(child)
-					
-					tree.write(MAPCACHE_CONFIG, encoding='utf-8')
-					try:
-						os.remove(os.path.join(cache_path, mapa+'.mbtiles'))
-					except:
-						pass
-					print '\n- '+mapa+'\n'
-				else:
-					print '\nError: no se encontro '+mapa+'.\n'
-	except:
-		print "Mapcache filelock!"
+	tree = ET.parse(MAPCACHE_CONFIG)
+	root = tree.getroot()
+	for mapa in maps:
+		elems = root.findall("*[@name='"+mapa+"']")
+		if len(elems) > 0:
+			for child in elems:
+				root.remove(child)
+			
+			tree.write(MAPCACHE_CONFIG, encoding='utf-8')
+			try:
+				os.remove(os.path.join(cache_path, mapa+'.mbtiles'))
+			except:
+				pass
+			print '\n- '+mapa+'\n'
+		else:
+			print '\nError: no se encontro '+mapa+'.\n'
 
 def _add(maps):
 	tree = ET.parse(MAPCACHE_CONFIG)

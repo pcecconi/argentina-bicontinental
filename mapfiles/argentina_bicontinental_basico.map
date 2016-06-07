@@ -1,12 +1,12 @@
 MAP
-	NAME "world_borders"
+	NAME "argentina_bicontinental_basico"
     CONFIG "MS_ERRORFILE" "/tmp/map-error.log"
     CONFIG "PROJ_LIB" "../"
     CONFIG "MS_OPENLAYERS_JS_URL" "http://openlayers.org/api/OpenLayers.js"
     IMAGETYPE png
     SIZE 600 400
 	UNITS meters
-    EXTENT -20037508.3427892 -20037508.3427892 20037508.3427892 20037508.3427892
+    EXTENT -8500000 -6000000 8500000 5000000
     IMAGECOLOR '#C6E2F2'
     SHAPEPATH '../data/'
 	SYMBOLSET "symbols.txt"
@@ -19,17 +19,17 @@ MAP
         "wms_onlineresource"	""
         "ows_attribution_title"	""
         "ows_encoding"	"UTF-8"
-        "mg_baselayerurl"	"/mapcache/tms/1.0.0/world_borders@GoogleMapsCompatible/{z}/{x}/{y}.png"
+        "mg_baselayerurl"	"/mapcache/tms/1.0.0/argentina_bicontinental_basico@argentina-bicontinental/{z}/{x}/{y}.png"
         "ows_abstract"	"Sin descripción"
         "ows_enable_request"	"*"
         "mg_onlineresource"	""
         "ows_contactorganization"	""
         "mg_siteurl"	"/"
-        "ows_srs"	"epsg:3857 epsg:4326"
+        "ows_srs"	"epsg:8233 epsg:3857 epsg:4326"
         "labelcache_map_edge_buffer"	"-10"
         "ows_title"	"World Borders"
         "wfs_getfeature_formatlist"	"geojson,shapezip,csv"
-        "mg_mapid"	"world_borders"
+        "mg_mapid"	"argentina-bicontinental"
         "mg_tmsbaselayer"	"True"
         END # METADATA
         TEMPLATE "templates/mapa-interactivo.html"
@@ -39,11 +39,11 @@ MAP
     END # WEB
     WEB
         METADATA
-            "ows_title" "World Borders"
+            "ows_title" "Argentina Bicontinental Básico"
             "ows_abstract" ""
             "ows_attribution_title" ""
 			"ows_contactorganization" ""
-            "ows_srs" "EPSG:3857"
+            "ows_srs" "EPSG:8233"
 			"ows_encoding" "UTF-8"
             "ows_enable_request" "*"
             "labelcache_map_edge_buffer" "-10"
@@ -52,7 +52,7 @@ MAP
         IMAGEURL '/ms_tmp/'
     END
     PROJECTION
-        "init=epsg:3857"
+        "init=epsg:8233"
     END
     
     LAYER

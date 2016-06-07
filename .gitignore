@@ -1,1 +1,5 @@
 data
+settings.py
+mapcache.xml
+cache
+*.pyc

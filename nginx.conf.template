@@ -5,7 +5,7 @@ server {
     # the domain name it will serve for
     server_name localhost; # substitute your machine's IP address or FQDN
     charset     utf-8;
-    root /path-to-www-root/
+    root /path-to-www-root/;
     index index.html index.htm;
 
     # Static assets

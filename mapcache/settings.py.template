@@ -1,0 +1,1 @@
+MAPSERVER_URL = 'http://localhost:8081/cgi-bin/mapserv'

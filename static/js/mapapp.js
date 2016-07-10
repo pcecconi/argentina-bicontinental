@@ -121,7 +121,7 @@ mg.MapApp = (function() {
                     proj4.transform(origin, wgs84, leftBottom);
                     proj4.transform(origin, wgs84, rightTop);
                     mapa = L.map(mapDivId, {
-                        crs: planif.proj[c.srs],
+                        crs: mg.proj[c.srs],
                         continuousWorld: true,
                         worldCopyJump: false,
                         attributionControl: false,
@@ -183,7 +183,7 @@ mg.MapApp = (function() {
                         .on('dblclick', stopPropagation);
 
                 } catch(e) {
-                    console.log('Se produjo un error al inicializar el mapa. Revise la configuración.');
+                    console.log('Se produjo un error al inicializar el mapa. Revise la configuración.', e);
                 }
 
             } else {

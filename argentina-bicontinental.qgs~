@@ -26,10 +26,10 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>353049.02013126510428265</xmin>
-      <ymin>6064475.2301650308072567</ymin>
-      <xmax>711841.42864096839912236</xmax>
-      <ymax>6962476.4427555538713932</ymax>
+      <xmin>-795146.08665956882759929</xmin>
+      <ymin>-5005485.72459261864423752</ymin>
+      <xmax>2075193.18141805753111839</xmax>
+      <ymax>2178523.97613157192245126</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
@@ -1903,8 +1903,8 @@ def my_form_open(dialog, layer, feature):
       <DegreeFormat type="QString">MU</DegreeFormat>
     </PositionPrecision>
     <WCSUrl type="QString"></WCSUrl>
-    <WMSServiceCapabilities type="bool">false</WMSServiceCapabilities>
     <WMSContactPhone type="QString"></WMSContactPhone>
+    <WMSServiceCapabilities type="bool">false</WMSServiceCapabilities>
     <WMSServiceAbstract type="QString"></WMSServiceAbstract>
     <WMSContactPosition type="QString"></WMSContactPosition>
     <WMSAddWktGeometry type="bool">false</WMSAddWktGeometry>
@@ -1985,7 +1985,7 @@ def my_form_open(dialog, layer, feature):
       <filterByMap type="bool">false</filterByMap>
     </Legend>
     <SpatialRefSys>
-      <ProjectCRSProj4String type="QString">+proj=stere +lat_0=-90 +lon_0=-63 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs</ProjectCRSProj4String>
+      <ProjectCRSProj4String type="QString">+proj=laea +lat_0=-40 +lon_0=-60 +x_0=0 +y_0=0 +ellps=WGS84 +units=m +no_defs</ProjectCRSProj4String>
       <ProjectCrs type="QString">USER:100000</ProjectCrs>
       <ProjectCRSID type="int">100000</ProjectCRSID>
       <ProjectionsEnabled type="int">1</ProjectionsEnabled>

@@ -26,6 +26,7 @@ MAP
         "ows_contactorganization"	""
         "mg_siteurl"	"/"
         "ows_srs"	"epsg:8234 epsg:3857 epsg:4326"
+        "mg_srs"	"EPSG:8234"
         "labelcache_map_edge_buffer"	"-10"
         "ows_title"	"World Borders"
         "wfs_getfeature_formatlist"	"geojson,shapezip,csv"

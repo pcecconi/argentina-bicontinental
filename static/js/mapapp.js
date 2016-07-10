@@ -4,7 +4,7 @@ var mg = mg || {};
 mg.proj = {
 	'EPSG:8234': new L.Proj.CRS.TMS('EPSG:8234',
 	  '+proj=stere +lat_0=-90 +lon_0=-63 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs',
-	  [-10000000, -2800000, 10000000, 13000000],
+	  [-10000000, -7000000, 10000000, 13000000],
 	  {
 		resolutions: [78125, 39062.5, 19531.25, 9765.625, 4882.8125, 2441.40625, 1220.703125, 610.3515625, 305.17578125, 152.587890625, 76.2939453125, 38.1469726562, 19.0734863281, 9.53674316406]
 	  }
@@ -136,6 +136,7 @@ mg.MapApp = (function() {
                     */
 
                     mapa = L.map(mapDivId, {
+                        crs: mg.proj[c.srs],
                         continuousWorld: true,
                         worldCopyJump: false,
                         attributionControl: false,

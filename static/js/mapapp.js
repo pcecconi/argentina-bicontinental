@@ -114,19 +114,24 @@ mg.MapApp = (function() {
                 var c = mg.map.config,
                     ext = c.extent.split(' ').map(parseFloat);
                 try {
-		   var wgs84 = new proj4.Proj("EPSG:4326"),
-			origin = new proj4.Proj(c.srs),
-			leftBottom = new proj4.Point(ext[0],ext[1]),
-			rightTop = new proj4.Point(ext[2],ext[3]);
-		   proj4.transform(origin, wgs84, leftBottom);
-		   proj4.transform(origin, wgs84, rightTop);
-		   mapa = L.map(mapDivId, {
-			  crs: planif.proj[c.srs],
-                          continuousWorld: true,
-                          worldCopyJump: false,
-                          attributionControl: false,
-                          minZoom: 2
-			}).fitBounds(L.latLngBounds(L.latLng(leftBottom.y, leftBottom.x), L.latLng(rightTop.y, rightTop.x)));
+                    var wgs84 = new proj4.Proj("EPSG:4326"),
+                        origin = new proj4.Proj(c.srs),
+                        leftBottom = new proj4.Point(ext[0],ext[1]),
+                        rightTop = new proj4.Point(ext[2],ext[3]);
+                    proj4.transform(origin, wgs84, leftBottom);
+                    proj4.transform(origin, wgs84, rightTop);
+                    mapa = L.map(mapDivId, {
+                        crs: planif.proj[c.srs],
+                        continuousWorld: true,
+                        worldCopyJump: false,
+                        attributionControl: false,
+                        minZoom: 2
+                    }).fitBounds(
+                        L.latLngBounds(
+                            L.latLng(leftBottom.y, leftBottom.x), 
+                            L.latLng(rightTop.y, rightTop.x)
+                        )
+                    );
 /*
                     mapa = L.map(mapDivId, {
                         continuousWorld: true,

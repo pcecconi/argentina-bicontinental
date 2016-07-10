@@ -114,6 +114,7 @@ mg.MapApp = (function() {
                 var c = mg.map.config,
                     ext = c.extent.split(' ').map(parseFloat);
                 try {
+                    /*
                     var wgs84 = new proj4.Proj("EPSG:4326"),
                         origin = new proj4.Proj(c.srs),
                         leftBottom = new proj4.Point(ext[0],ext[1]),
@@ -132,7 +133,8 @@ mg.MapApp = (function() {
                             L.latLng(rightTop.y, rightTop.x)
                         )
                     );
-/*
+                    */
+
                     mapa = L.map(mapDivId, {
                         continuousWorld: true,
                         worldCopyJump: false,
@@ -144,7 +146,7 @@ mg.MapApp = (function() {
                             L.latLng(ext[3], ext[2])
                         )
                     ); 
-*/
+
                     var attribution = L.control.attribution({
                         prefix: ''
                     }).addTo(mapa);

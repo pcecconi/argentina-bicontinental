@@ -121,7 +121,7 @@ mg.MapApp = (function() {
                     proj4.transform(origin, wgs84, leftBottom);
                     proj4.transform(origin, wgs84, rightTop);
                     mapa = L.map(mapDivId, {
-                        crs: mg.proj[c.srs],
+                        // crs: mg.proj[c.srs],
                         continuousWorld: true,
                         worldCopyJump: false,
                         attributionControl: false,

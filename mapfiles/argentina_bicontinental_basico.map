@@ -16,42 +16,29 @@ MAP
         IMAGEPATH "/dev/shm/"
         IMAGEURL "/ms_tmp/"
         METADATA
-        "wms_onlineresource"	""
-        "ows_attribution_title"	""
-        "ows_encoding"	"UTF-8"
-        "mg_baselayerurl"	"/mapcache/tms/1.0.0/argentina_bicontinental_basico@argentina-bicontinental/{z}/{x}/{y}.png"
-        "ows_abstract"	"Sin descripción"
-        "ows_enable_request"	"*"
-        "mg_onlineresource"	""
-        "ows_contactorganization"	""
-        "mg_siteurl"	"/"
-        "ows_srs"	"epsg:8234 epsg:3857 epsg:4326"
-        "mg_crs"	"EPSG8234"
-        "labelcache_map_edge_buffer"	"-10"
-        "ows_title"	"World Borders"
-        "wfs_getfeature_formatlist"	"geojson,shapezip,csv"
-        "mg_mapid"	"argentina-bicontinental"
-        "mg_tmsbaselayer"	"True"
+            "wms_onlineresource"	""
+            "ows_attribution_title"	""
+            "ows_encoding"	"UTF-8"
+            "mg_baselayerurl"	"/mapcache/tms/1.0.0/argentina_bicontinental_basico@argentina-bicontinental/{z}/{x}/{y}.png"
+            "ows_abstract"	"Sin descripción"
+            "ows_enable_request"	"*"
+            "mg_onlineresource"	""
+            "ows_contactorganization"	""
+            "mg_siteurl"	"/"
+            "ows_srs"	"epsg:8234 epsg:3857 epsg:4326"
+            "mg_crs"	"EPSG8234"
+            "labelcache_map_edge_buffer"	"-10"
+            "ows_title"	"World Borders"
+            "wfs_getfeature_formatlist"	"geojson,shapezip,csv"
+            "mg_mapid"	"argentina-bicontinental"
+            "mg_tmsbaselayer"	"True"
         END # METADATA
         TEMPLATE "templates/mapa-interactivo.html"
         VALIDATION
         "TEMPLATE"	"[a-z/.]+"
         END # VALIDATION
     END # WEB
-    WEB
-        METADATA
-            "ows_title" "Argentina Bicontinental Básico"
-            "ows_abstract" ""
-            "ows_attribution_title" ""
-			"ows_contactorganization" ""
-            "ows_srs" "EPSG:8234"
-			"ows_encoding" "UTF-8"
-            "ows_enable_request" "*"
-            "labelcache_map_edge_buffer" "-10"
-        END
-        IMAGEPATH '/dev/shm/'
-        IMAGEURL '/ms_tmp/'
-    END
+
     PROJECTION
         "init=epsg:8234"
     END

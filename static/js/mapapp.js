@@ -1,7 +1,7 @@
 // Definicion del namespace
 var mg = mg || {};
 
-L.CRS['EPSG:8234'] = new L.Proj.CRS.TMS('EPSG:8234',
+L.CRS['EPSG8234'] = new L.Proj.CRS.TMS('EPSG:8234',
 	  '+proj=stere +lat_0=-90 +lon_0=-63 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs',
 	  [-10000000, -7000000, 10000000, 13000000],
 	  {
@@ -111,7 +111,7 @@ mg.MapApp = (function() {
             if (mg.map && mg.map.config) {
                 var c = mg.map.config,
                     ext = c.extent.split(' ').map(parseFloat),
-                    crs = L.CRS[c.srs];
+                    crs = L.CRS[c.crs];
                 try {
                     /*
                     var wgs84 = new proj4.Proj("EPSG:4326"),

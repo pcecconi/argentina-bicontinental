@@ -111,7 +111,7 @@ mg.MapApp = (function() {
             if (mg.map && mg.map.config) {
                 var c = mg.map.config,
                     ext = c.extent.split(' ').map(parseFloat);
-		c.crs = c.crs.toUpperCase();
+		        c.crs = c.crs.toUpperCase();
                 var crs = L.CRS[c.crs.replace(':', '')];
                 try {                    
                     leftBottom = proj4(c.crs).inverse(ext.slice(0,2));

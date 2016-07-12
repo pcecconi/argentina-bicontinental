@@ -7,7 +7,7 @@ MAP
     SIZE 600 400
 	UNITS meters
     EXTENT -5000000 -2500000 5000000 4500000
-    IMAGECOLOR '#C6E2F2'
+    IMAGECOLOR '#22a3e0'
     SHAPEPATH '../data/'
 	SYMBOLSET "symbols.txt"
     FONTSET 'fonts.txt'
@@ -28,7 +28,7 @@ MAP
             "ows_srs"	"epsg:8234 epsg:3857 epsg:4326"
             "mg_crs"	"epsg:8234"
             "labelcache_map_edge_buffer"	"-10"
-            "ows_title"	"World Borders"
+            "ows_title"	"Argentina Bicontinental Básico"
             "wfs_getfeature_formatlist"	"geojson,shapezip,csv"
             "mg_mapid"	"argentina-bicontinental"
             "mg_tmsbaselayer"	"True"
@@ -56,8 +56,27 @@ MAP
         DATA 'world_borders-3857.shp'
         CLASS
             STYLE
-                COLOR '#EEECDF'
-                OUTLINECOLOR '#CBCCCA'
+                COLOR '#18739e'
+                OUTLINECOLOR '#75818e'
+            END
+        END
+    END      
+    
+    LAYER
+        NAME 'provincias'
+        TYPE POLYGON
+        GROUP 'default'
+        STATUS ON
+        PROJECTION
+            'init=epsg:4326'
+        END
+        PROCESSING 'LABEL_NO_CLIP=ON'
+        PROCESSING 'CLOSE_CONNECTION=DEFER'
+        DATA 'provincias.shp'
+        CLASS
+            STYLE
+                COLOR '#18739e'
+                OUTLINECOLOR '#f6f6f6'
             END
         END
     END      

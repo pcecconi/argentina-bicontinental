@@ -110,8 +110,9 @@ mg.MapApp = (function() {
 
             if (mg.map && mg.map.config) {
                 var c = mg.map.config,
-                    ext = c.extent.split(' ').map(parseFloat),
-                    crs = L.CRS[c.crs.replace(':', '').toUpperCase()];
+                    ext = c.extent.split(' ').map(parseFloat);
+		c.crs = c.crs.toUpperCase();
+                var crs = L.CRS[c.crs.replace(':', '')];
                 try {                    
                     leftBottom = proj4(c.crs).inverse(ext.slice(0,2));
                     rightTop = proj4(c.crs).inverse(ext.slice(2,4));
@@ -182,6 +183,7 @@ mg.MapApp = (function() {
                 } catch(e) {
                     console.log('Se produjo un error al inicializar el mapa. Revise la configuración.', e);
                 }
+
 
             } else {
                 console.log('Missing configuration mg.map.config');

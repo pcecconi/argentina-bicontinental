@@ -111,29 +111,24 @@ mg.MapApp = (function() {
             if (mg.map && mg.map.config) {
                 var c = mg.map.config,
                     ext = c.extent.split(' ').map(parseFloat),
-                    crs = L.CRS[c.crs];
-                try {
-                    /*
-                    var wgs84 = new proj4.Proj("EPSG:4326"),
-                        origin = new proj4.Proj(c.srs),
-                        leftBottom = new proj4.Point(ext[0],ext[1]),
-                        rightTop = new proj4.Point(ext[2],ext[3]);
-                    proj4.transform(origin, wgs84, leftBottom);
-                    proj4.transform(origin, wgs84, rightTop);
+                    crs = L.CRS[c.crs.replace(':', '').toUpperCase()];
+                try {                    
+                    leftBottom = proj4(c.crs).inverse(ext.slice(0,2));
+                    rightTop = proj4(c.crs).inverse(ext.slice(2,4));
                     mapa = L.map(mapDivId, {
-                        // crs: mg.proj[c.srs],
+                        crs: crs,
                         continuousWorld: true,
                         worldCopyJump: false,
                         attributionControl: false,
                         minZoom: 2
                     }).fitBounds(
                         L.latLngBounds(
-                            L.latLng(leftBottom.y, leftBottom.x), 
-                            L.latLng(rightTop.y, rightTop.x)
+                            L.latLng(leftBottom[1], leftBottom[0]), 
+                            L.latLng(rightTop[1], rightTop[0])
                         )
                     );
-                    */
-
+                    
+/*
                     mapa = L.map(mapDivId, {
                         crs: crs,
                         continuousWorld: true,
@@ -146,7 +141,7 @@ mg.MapApp = (function() {
                             L.latLng(ext[3], ext[2])
                         )
                     ); 
-
+*/
                     var attribution = L.control.attribution({
                         prefix: ''
                     }).addTo(mapa);

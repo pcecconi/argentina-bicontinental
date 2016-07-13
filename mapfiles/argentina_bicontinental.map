@@ -1,0 +1,161 @@
+MAP
+	NAME "argentina_bicontinental"
+    CONFIG "MS_ERRORFILE" "/tmp/map-error.log"
+    CONFIG "PROJ_LIB" "../"
+    CONFIG "MS_OPENLAYERS_JS_URL" "http://openlayers.org/api/OpenLayers.js"
+    IMAGETYPE png
+    SIZE 600 400
+	UNITS meters
+    EXTENT -5000000 -2500000 5000000 4500000
+    IMAGECOLOR '#22a3e0'
+    SHAPEPATH '../data/'
+	SYMBOLSET "symbols.txt"
+    FONTSET 'fonts.txt'
+    
+    WEB
+        IMAGEPATH "/dev/shm/"
+        IMAGEURL "/ms_tmp/"
+        METADATA
+            "wms_onlineresource"	""
+            "ows_attribution_title"	""
+            "ows_encoding"	"UTF-8"
+            "mg_baselayerurl"	"/mapcache/tms/1.0.0/argentina_bicontinental@argentina-bicontinental/{z}/{x}/{y}.png"
+            "ows_abstract"	"Mapa de Argentina Bicontinental"
+            "ows_enable_request"	"*"
+            "mg_onlineresource"	""
+            "ows_contactorganization"	""
+            "mg_siteurl"	"/"
+            "ows_srs"	"epsg:8234 epsg:3857 epsg:4326"
+            "mg_crs"	"epsg:8234"
+            "labelcache_map_edge_buffer"	"-10"
+            "ows_title"	"Argentina Bicontinental"
+            "wfs_getfeature_formatlist"	"geojson,shapezip,csv"
+            "mg_mapid"	"argentina-bicontinental"
+            "mg_tmsbaselayer"	"True"
+        END # METADATA
+        TEMPLATE "templates/mapa-interactivo.html"
+        VALIDATION
+        "TEMPLATE"	"[a-z/.]+"
+        END # VALIDATION
+    END # WEB
+
+    PROJECTION
+        "init=epsg:8234"
+    END
+    
+    
+  LAYER
+    NAME "paises"
+    CONNECTION "host='localhost' dbname='smn' user='smn' password='asdfp'"
+    CONNECTIONTYPE POSTGIS
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='País' and nam is not null) aa using unique ogc_fid"
+    TYPE POLYGON
+    GROUP 'default'
+    STATUS ON
+    PROJECTION
+            'init=epsg:4326'
+    END # PROJECTION
+    PROCESSING 'LABEL_NO_CLIP=ON'
+    PROCESSING 'CLOSE_CONNECTION=DEFER'
+    CLASS
+        STYLE
+            COLOR '#18739e'
+            OUTLINECOLOR '#75818e'
+       END
+    END
+  END # LAYER
+    
+  LAYER
+    NAME "antartida"
+    CONNECTION "host='localhost' dbname='smn' user='smn' password='asdfp'"
+    CONNECTIONTYPE POSTGIS
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='País' and nam is null) aa using unique ogc_fid"
+    TYPE POLYGON
+    GROUP 'default'
+    STATUS ON
+    PROJECTION
+            'init=epsg:4326'
+    END # PROJECTION
+    PROCESSING 'LABEL_NO_CLIP=ON'
+    PROCESSING 'CLOSE_CONNECTION=DEFER'
+    CLASS
+       STYLE
+            COLOR '#f8f8f8'
+            OUTLINECOLOR '#18739e'
+       END
+    END
+  END # LAYER
+
+  # con esto tenemos paises mas argentina
+  LAYER
+    NAME "argentina"
+    CONNECTION "host='localhost' dbname='smn' user='smn' password='asdfp'"
+    CONNECTIONTYPE POSTGIS
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='Provincia') aa using unique ogc_fid"
+    TYPE POLYGON
+    GROUP 'default'
+    STATUS ON
+    PROJECTION
+            'init=epsg:4326'
+    END # PROJECTION
+    PROCESSING 'LABEL_NO_CLIP=ON'
+    PROCESSING 'CLOSE_CONNECTION=DEFER'
+    CLASS
+       STYLE
+           COLOR '#18739e'
+           OUTLINECOLOR '#18739e'
+       END
+    END
+  END # LAYER
+
+  LAYER
+    NAME "departamentos"
+    CONNECTION "host='localhost' dbname='smn' user='smn' password='asdfp'"
+    CONNECTIONTYPE POSTGIS
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='Departamento') aa using unique ogc_fid"
+    TYPE POLYGON
+    GROUP 'default'
+    STATUS ON
+    PROJECTION
+            'init=epsg:4326'
+    END # PROJECTION
+    PROCESSING 'LABEL_NO_CLIP=ON'
+    PROCESSING 'CLOSE_CONNECTION=DEFER'
+    MAXSCALEDENOM 8000000 # 8 millones
+    CLASS
+        STYLE
+            #COLOR '#18739e'
+            OUTLINECOLOR '#a4bcbc'
+      		WIDTH 1
+      		LINECAP butt
+      		PATTERN 3 3 3 3 END            
+       END
+    END
+  END # LAYER
+
+  LAYER
+    NAME "provincias"
+    CONNECTION "host='localhost' dbname='smn' user='smn' password='asdfp'"
+    CONNECTIONTYPE POSTGIS
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='Provincia') aa using unique ogc_fid"
+    TYPE POLYGON
+    GROUP 'default'
+    STATUS ON
+    PROJECTION
+            'init=epsg:4326'
+    END # PROJECTION
+    PROCESSING 'LABEL_NO_CLIP=ON'
+    PROCESSING 'CLOSE_CONNECTION=DEFER'
+    SYMBOLSCALEDENOM 8000000
+    CLASS
+		STYLE
+		  OUTLINECOLOR '#f6f6f6'
+		  WIDTH 1
+		  MAXWIDTH 3
+		  MINWIDTH 1
+		END       
+    END
+  END # LAYER
+
+
+END

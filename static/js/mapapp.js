@@ -170,7 +170,7 @@ mg.MapApp = (function() {
                     mapa.addControl(new mg.Abstract(c, '<p class="legend_title">Referencias</p>\
 <img src="/media/'+c.mapid+'_legend.png?t='+Math.floor(Math.random()*100001)+'"/>', { abstract: (params.abstract && params.abstract != 0), title: (params.title && params.title != 0), minimized: (params.refs && params.refs == 0) }));
 */
-                    var miniMap = new L.Control.MiniMap(ref_layer, { toggleDisplay: true, minimized: true }).addTo(mapa);
+                    // var miniMap = new L.Control.MiniMap(ref_layer, { toggleDisplay: true, minimized: true }).addTo(mapa);
                     
                     // mapa.on('click', onContextMenu, this);
 

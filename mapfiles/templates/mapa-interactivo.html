@@ -20,8 +20,10 @@
     <!-- Le styles -->
     <link href="/static/css/fonts.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/static/libs/leaflet/leaflet.css" />
+    <!--
     <link rel="stylesheet" type="text/css" href="/static/css/abstract.control.css" />
     <link rel="stylesheet" type="text/css" href="/static/assets/js/leaflet-minimap/src/Control.MiniMap.css" />
+    -->
     <style>
         body {
           font-family: 'Roboto Condensed', 'Helvetica', 'Arial', sans-serif;
@@ -52,20 +54,20 @@
             font-size: 26px;
             font-weight: 100;
         }
-	.leaflet-bar {
-	    box-shadow: none;
-	}
-	.leaflet-bar a {
+        .leaflet-bar {
+            box-shadow: none;
+        }
+        .leaflet-bar a {
             border-radius: 50%!important;
-	    border: 1px solid #e1b721;
+            border: 1px solid #e1b721;
             margin-bottom: 5px;
             width: 30px;
             height: 30px;
             background-color: #f1c731!important;
-	    color: #444!important;
+            color: #444!important;
             line-height: 30px;
- 	    text-indent: 0;
-	}
+            text-indent: 0;
+        }
     </style>
 </head>
 <body>
@@ -76,8 +78,10 @@
 <script type="text/javascript" src="/static/libs/leaflet/leaflet.js"></script>
 <script type="text/javascript" src="/static/assets/js/proj4.js"></script>
 <script type="text/javascript" src="/static/assets/js/proj4leaflet/src/proj4leaflet.js"></script>
-<script type="text/javascript" src="/static/js/abstract.control.js"></script>    
+<script type="text/javascript" src="/static/js/abstract.control.js"></script>
+<!--    
 <script type="text/javascript" src="/static/assets/js/leaflet-minimap/src/Control.MiniMap.js"></script>
+-->
 <script type="text/javascript" src="/static/js/mapapp.js"></script>
 
 <script type="text/template" id="template-panel-informacion">
@@ -95,8 +99,6 @@ mg.map.config = {
     "extent": "[rawext]",
     "siteurl":"[web_mg_siteurl]",
     "crs":"[web_mg_crs]",
-// [-55.055620, -73.570804, -21.743129, -53.641451], // [mapext format=[$minx,$miny,$maxx,$maxy]],
-    // "extent": "-73.570804 -55.055620 -21.743129 -53.641451",
     "baselayerurl":"[web_mg_baselayerurl]",
     "tmsbaselayer":"[web_mg_tmsbaselayer]",
     "onlineresource":"[web_mg_onlineresource]",

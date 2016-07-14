@@ -46,7 +46,7 @@ MAP
     
   LAYER
     NAME "paises"
-    CONNECTION "host='localhost' dbname='smn' user='smn' password='asdfp'"
+    CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
     DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='País' and nam is not null) aa using unique ogc_fid"
     TYPE POLYGON
@@ -67,7 +67,7 @@ MAP
     
   LAYER
     NAME "antartida"
-    CONNECTION "host='localhost' dbname='smn' user='smn' password='asdfp'"
+    CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
     DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='País' and nam is null) aa using unique ogc_fid"
     TYPE POLYGON
@@ -89,7 +89,7 @@ MAP
   # con esto tenemos paises mas argentina
   LAYER
     NAME "argentina"
-    CONNECTION "host='localhost' dbname='smn' user='smn' password='asdfp'"
+    CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
     DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='Provincia') aa using unique ogc_fid"
     TYPE POLYGON
@@ -110,7 +110,7 @@ MAP
 
   LAYER
     NAME "departamentos"
-    CONNECTION "host='localhost' dbname='smn' user='smn' password='asdfp'"
+    CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
     DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='Departamento') aa using unique ogc_fid"
     TYPE POLYGON
@@ -135,7 +135,7 @@ MAP
 
   LAYER
     NAME "provincias"
-    CONNECTION "host='localhost' dbname='smn' user='smn' password='asdfp'"
+    CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
     DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='Provincia') aa using unique ogc_fid"
     TYPE POLYGON

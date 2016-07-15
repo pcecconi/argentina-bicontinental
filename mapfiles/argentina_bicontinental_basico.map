@@ -44,7 +44,7 @@ MAP
     END # WEB
 
     PROJECTION
-        "init=epsg:8234"
+        "init=epsg:8233"
     END
     
     LAYER

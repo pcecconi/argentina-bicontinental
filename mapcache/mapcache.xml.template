@@ -81,7 +81,7 @@
 	   <metadata>
 	     <title>Argentina Bicontinental Equi-Area</title>
 	   </metadata>
-	   <extent>-40000000 -5400000 4000000 2600000</extent>
+	   <extent>-4000000 -5400000 4000000 2600000</extent>
 	   <srs>EPSG:8233</srs>
 	   <units>m</units>
 	   <size>256 256</size>

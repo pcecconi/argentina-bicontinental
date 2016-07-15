@@ -77,11 +77,22 @@
 	   <resolutions>44140.625 22070.3125 11035.15625 5517.578125 2758.7890625 1379.39453125 689.697265625 344.848632813 172.424316406 86.212158203 43.106079102 21.553039551 10.776519775</resolutions>
 	</grid>
 
-	<grid name="argentina-bicontinental">
+	<grid name="argentina-bicontinental-laea">
 	   <metadata>
-	     <title>Argentina Bicontinental</title>
+	     <title>Argentina Bicontinental Equi-Area</title>
 	   </metadata>
-	   <extent>-10000000 -7000000 10000000 13000000</extent>
+	   <extent>-40000000 -5400000 4000000 2600000</extent>
+	   <srs>EPSG:8233</srs>
+	   <units>m</units>
+	   <size>256 256</size>
+	   <resolutions>31250.0 15625.0 7812.5 3906.25 1953.125 976.5625 488.28125 244.140625 122.0703125 61.03515625 30.517578125 15.2587890625</resolutions>
+	</grid>
+
+	<grid name="argentina-bicontinental-stere">
+	   <metadata>
+	     <title>Argentina Bicontinental Estereografica</title>
+	   </metadata>
+	   <extent>-10000000 -7000000 9000000 9000000</extent>
 	   <srs>EPSG:8234</srs>
 	   <units>m</units>
 	   <size>256 256</size>

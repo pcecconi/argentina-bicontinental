@@ -6,7 +6,10 @@ MAP
     IMAGETYPE png
     SIZE 600 400
 	UNITS meters
-    EXTENT -5000000 -1000000 5000000 9500000
+    # Extent para Estereografica
+    # EXTENT -5000000 -1000000 5000000 9500000
+    # Extent para Equi-Area
+    EXTENT -40000000 -5400000 4000000 2600000 
     IMAGECOLOR '#22a3e0'
     SHAPEPATH '../data/'
 	SYMBOLSET "symbols.txt"
@@ -25,8 +28,9 @@ MAP
             "mg_onlineresource"	""
             "ows_contactorganization"	""
             "mg_siteurl"	"/"
-            "ows_srs"	"epsg:8234 epsg:3857 epsg:4326"
-            "mg_crs"	"epsg:8234"
+            "ows_srs"	"epsq:8233 epsg:8234 epsg:3857 epsg:4326"
+            "mg_crs"	"epsg:8233"
+            # "mg_crs"	"epsg:8234"
             "labelcache_map_edge_buffer"	"-10"
             "ows_title"	"Argentina Bicontinental Básico"
             "wfs_getfeature_formatlist"	"geojson,shapezip,csv"

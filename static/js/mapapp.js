@@ -128,9 +128,11 @@ mg.MapApp = (function() {
                         crs: crs,
                         continuousWorld: true,
                         worldCopyJump: false,
-                        attributionControl: false,
-                        minZoom: 2,
-                        maxZoom: 9
+                        attributionControl: false
+                        /*,
+                        minZoom: 0,
+                        maxZoom:
+                        */ 
                     }).fitBounds(
                         L.latLngBounds(
                             L.latLng(leftBottom[1], leftBottom[0]), 

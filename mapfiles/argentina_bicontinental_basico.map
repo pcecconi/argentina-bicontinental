@@ -22,7 +22,7 @@ MAP
             "wms_onlineresource"	""
             "ows_attribution_title"	""
             "ows_encoding"	"UTF-8"
-            "mg_baselayerurl"	"/mapcache/tms/1.0.0/argentina_bicontinental_basico@argentina-bicontinental/{z}/{x}/{y}.png"
+            "mg_baselayerurl"	"/mapcache/tms/1.0.0/argentina_bicontinental_basico@argentina-bicontinental-laea/{z}/{x}/{y}.png"
             "ows_abstract"	"Sin descripción"
             "ows_enable_request"	"*"
             "mg_onlineresource"	""

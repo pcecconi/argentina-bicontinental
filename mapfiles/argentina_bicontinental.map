@@ -49,7 +49,7 @@ MAP
     NAME "paises"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select *, st_transform(wkb_geometry, 98639) as geom_proj from smn_layers.lima) aa using unique gid using srid=98639"
+    DATA "geom_proj from (select *, st_transform(wkb_geometry, 98639) as geom_proj from smn_layers.lima) aa using unique ogc_fid using srid=98639"
     # DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='País' and nam is not null) aa using unique ogc_fid"
     TYPE POLYGON
     GROUP 'default'
@@ -71,7 +71,7 @@ MAP
     NAME "antartida"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select *, st_transform(wkb_geometry, 98639) as geom_proj from smn_layers.lima) aa using unique gid using srid=98639"
+    DATA "geom_proj from (select *, st_transform(wkb_geometry, 98639) as geom_proj from smn_layers.lima) aa using unique ogc_fid using srid=98639"
     # DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='País' and nam is null) aa using unique ogc_fid"
     TYPE POLYGON
     GROUP 'default'

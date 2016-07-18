@@ -1,18 +1,20 @@
 // Definicion del namespace
 var mg = mg || {};
 
-L.CRS['EPSG8233'] = new L.Proj.CRS.TMS('EPSG:8233',
+L.CRS['EPSG8233'] = new L.Proj.CRS('EPSG:8233',
 	  '+proj=laea +lat_0=-40 +lon_0=-60 +x_0=0 +y_0=0 +ellps=WGS84 +units=m +no_defs',
-	  [-4000000, -5400000, 4000000, 2600000],
+	  // [-4000000, -5400000, 4000000, 2600000],      
 	  {
+  		origin: [-4000000, 4000000],
 		resolutions: [31250.0, 15625.0, 7812.5, 3906.25, 1953.125, 976.5625, 488.28125, 244.140625, 122.0703125, 61.03515625, 30.517578125, 15.2587890625]
 	  }
 	);
 
-L.CRS['EPSG8234'] = new L.Proj.CRS.TMS('EPSG:8234',
+L.CRS['EPSG8234'] = new L.Proj.CRS('EPSG:8234',
 	  '+proj=stere +lat_0=-90 +lon_0=-63 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs',
-	  [-10000000, -7000000, 10000000, 13000000],
+	  // [-10000000, -7000000, 10000000, 13000000],
 	  {
+        origin: [-10000000, 13000000],
 		resolutions: [78125, 39062.5, 19531.25, 9765.625, 4882.8125, 2441.40625, 1220.703125, 610.3515625, 305.17578125, 152.587890625, 76.2939453125, 38.1469726562, 19.0734863281, 9.53674316406]
 	  }
 	);
@@ -165,14 +167,14 @@ mg.MapApp = (function() {
 
                     var ref_layer = L.tileLayer(c.baselayerurl, {
                         tms: true,
-                        continuousWorld: true
+                        continuousWorld: false
                     });
 
                     if (c.onlineresource!="") {
                         var layer = L.tileLayer(c.onlineresource, {
                             attribution: '<b>Fuente:</b> '+c.attribution,
                             tms: true,
-                            continuousWorld: true
+                            continuousWorld: false
                         }).addTo(mapa);
                     }
                     

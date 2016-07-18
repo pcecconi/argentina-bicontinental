@@ -7,9 +7,9 @@ MAP
     SIZE 600 400
 	UNITS meters
     # Extent para Estereografica
-    EXTENT -5000000 -1000000 5000000 9500000
+    # EXTENT -5000000 -1000000 5000000 9500000
     # Extent para Equi-Area
-    # EXTENT -4000000 -5400000 4000000 2600000 
+    EXTENT -4000000 -5400000 4000000 2600000 
     IMAGECOLOR '#22a3e0'
     SHAPEPATH '../data/'
 	SYMBOLSET "symbols.txt"
@@ -22,14 +22,14 @@ MAP
             "wms_onlineresource"	""
             "ows_attribution_title"	""
             "ows_encoding"	"UTF-8"
-            "mg_baselayerurl"	"/mapcache/tms/1.0.0/argentina_bicontinental_basico@argentina-bicontinental-stere/{z}/{x}/{y}.png"
+            "mg_baselayerurl"	"/mapcache/tms/1.0.0/argentina_bicontinental_basico@argentina-bicontinental-laea/{z}/{x}/{y}.png"
             "ows_abstract"	"Sin descripción"
             "ows_enable_request"	"*"
             "mg_onlineresource"	""
             "ows_contactorganization"	""
             "mg_siteurl"	"/"
-            "ows_srs"	"epsg:8234 epsg:8234 epsg:3857 epsg:4326"
-            "mg_crs"	"epsg:8234"
+            "ows_srs"	"epsg:8233 epsg:8234 epsg:3857 epsg:4326"
+            "mg_crs"	"epsg:8233"
             # "mg_crs"	"epsg:8234"
             "labelcache_map_edge_buffer"	"-10"
             "ows_title"	"Argentina Bicontinental Básico"
@@ -44,7 +44,7 @@ MAP
     END # WEB
 
     PROJECTION
-        "init=epsg:8234"
+        "init=epsg:8233"
     END
     
     LAYER
@@ -72,11 +72,11 @@ MAP
         GROUP 'default'
         STATUS ON
         PROJECTION
-            'init=epsg:8234'
+            'init=epsg:4326'
         END
         PROCESSING 'LABEL_NO_CLIP=ON'
         PROCESSING 'CLOSE_CONNECTION=DEFER'
-        DATA 'provincias_8234.shp'
+        DATA 'provincias.shp'
         CLASS
             STYLE
                 COLOR '#18739e'

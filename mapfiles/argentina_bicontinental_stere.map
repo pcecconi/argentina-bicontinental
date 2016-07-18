@@ -1,5 +1,5 @@
 MAP
-	NAME "argentina_bicontinental_basico"
+	NAME "argentina_bicontinental_stere"
     CONFIG "MS_ERRORFILE" "/tmp/map-error.log"
     CONFIG "PROJ_LIB" "../"
     CONFIG "MS_OPENLAYERS_JS_URL" "http://openlayers.org/api/OpenLayers.js"
@@ -22,7 +22,7 @@ MAP
             "wms_onlineresource"	""
             "ows_attribution_title"	""
             "ows_encoding"	"UTF-8"
-            "mg_baselayerurl"	"/mapcache/tms/1.0.0/argentina_bicontinental_basico@argentina-bicontinental-stere/{z}/{x}/{y}.png"
+            "mg_baselayerurl"	"/mapcache/tms/1.0.0/argentina_bicontinental_stere@argentina-bicontinental-stere/{z}/{x}/{y}.png"
             "ows_abstract"	"Sin descripción"
             "ows_enable_request"	"*"
             "mg_onlineresource"	""

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Argentina Bicontinental</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<meta name="author" content="Pablo Cecconi"/>
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .leaflet-container {
+            cursor: default;
+        }
+        .leaflet-popup-content {
+            color: #444;
+        }
+        .leaflet-popup-content ul {
+            list-style: none;
+            margin-left: 2px;
+            padding-left: 0;
+        }        
+        .leaflet-container .leaflet-control-attribution {
+            margin-left: 100px;
+        }
+        .leaflet-control-zoom-in, .leaflet-control-zoom-out {
+            font-size: 26px;
+            font-weight: 100;
+        }
+        .leaflet-bar {
+            box-shadow: none;
+        }
+        .leaflet-bar a,.leaflet-bar a:hover {
+            border-radius: 50%!important;
+            border: 1px solid #e1b721;
+            margin-bottom: 5px;
+            width: 30px;
+            height: 30px;
+            background-color: #f1c731!important;
+            color: #444!important;
+            line-height: 30px;
+            text-indent: 0;
+        }
+        #mapa {
+            height: 600px;
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="mapa" class="mapa"><p class="indicator">Cargando...</p></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+<script type="text/javascript" src="assets/proj4.js"></script>
+<script type="text/javascript" src="assets/proj4leaflet.js"></script>
+<script type="text/javascript" src="js/map.js"></script>
+
+<script type="text/javascript">
+// Definicion del namespace
+var smn = smn || {};
+smn.map = smn.map || {};
+
+smn.map.config = {
+    "title":"Argentina Bicontinental",
+    "attribution":"IGN",
+    "extent": "-5000000 -1000000 5000000 9500000",
+    "crs":"sr-org:8639",
+    "baselayerurl":"/mapcache/tms/1.0.0/argentina_bicontinental_basico@argentina-bicontinental-stere/{z}/{x}/{y}.png",
+    // "baselayerurl":"/mapcache/tms/1.0.0/argentina_bicontinental@argentina-bicontinental-stere/{z}/{x}/{y}.png",
+    "tmsbaselayer": true,
+    "fullscreen": true,
+    "mapid": "argentina_bicontinental_basico"
+};
+
+$(document).ready(smn.Map.init);
+</script>
+</body>
+</html>

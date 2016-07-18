@@ -28,9 +28,8 @@ MAP
             "mg_onlineresource"	""
             "ows_contactorganization"	""
             "mg_siteurl"	"/"
-            "ows_srs"	"epsg:8234 epsg:8234 epsg:3857 epsg:4326"
-            "mg_crs"	"epsg:8234"
-            # "mg_crs"	"epsg:8234"
+            "ows_srs"	"epsg:98639 epsg:3857 epsg:4326"
+            "mg_crs"	"sr-org:8639"
             "labelcache_map_edge_buffer"	"-10"
             "ows_title"	"Argentina Bicontinental Básico"
             "wfs_getfeature_formatlist"	"geojson,shapezip,csv"
@@ -44,7 +43,7 @@ MAP
     END # WEB
 
     PROJECTION
-        "init=epsg:8234"
+        "init=sr-org:8639"
     END
     
     LAYER
@@ -72,7 +71,7 @@ MAP
         GROUP 'default'
         STATUS ON
         PROJECTION
-            'init=epsg:8234'
+            'init=sr-org:8639'
         END
         PROCESSING 'LABEL_NO_CLIP=ON'
         PROCESSING 'CLOSE_CONNECTION=DEFER'

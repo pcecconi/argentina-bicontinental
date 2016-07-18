@@ -1,0 +1,4 @@
+# Argentina Bicontinental Equi-Area
+<8233> +proj=laea +lat_0=-40 +lon_0=-60 +x_0=0 +y_0=0 +ellps=WGS84 +units=m +no_defs
+# Argentina Bicontinental Estereografica
+<8639> +proj=stere +lat_0=-90 +lon_0=-63 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs

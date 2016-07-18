@@ -1,7 +1,7 @@
 // Definicion del namespace
 var mg = mg || {};
 
-L.CRS['EPSG8233'] = new L.Proj.CRS('EPSG:8233',
+L.CRS['SR-ORG8233'] = new L.Proj.CRS('SR-ORG:8233',
 	  '+proj=laea +lat_0=-40 +lon_0=-60 +x_0=0 +y_0=0 +ellps=WGS84 +units=m +no_defs',
 	  // [-4000000, -5400000, 4000000, 2600000],      
 	  {
@@ -10,7 +10,7 @@ L.CRS['EPSG8233'] = new L.Proj.CRS('EPSG:8233',
 	  }
 	);
 
-L.CRS['EPSG8234'] = new L.Proj.CRS('EPSG:8234',
+L.CRS['SR-ORG8639'] = new L.Proj.CRS('SR-ORG:8639',
 	  '+proj=stere +lat_0=-90 +lon_0=-63 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs',
 	  // [-10000000, -7000000, 10000000, 13000000],
 	  {
@@ -40,66 +40,6 @@ mg.MapApp = (function() {
         } else {
             ev.cancelBubble = true;
         }            
-    }
-
-    function removeContextMarker() {
-        contextMarker.off('popupclose');
-        contextMarker.unbindPopup();
-        try {
-            mapa.removeLayer(contextMarker);
-        } catch(e) {
-            console.log(e);
-        }
-        contextMarker = undefined;
-    }
-
-    function onContextMenu(ev) {
-        if (contextMarker) {
-            removeContextMarker();
-        }
-        var marker = L.marker(ev.latlng).addTo(mapa),
-            self = this;
-        var ne = L.CRS.EPSG3857.project(mapa.getBounds()._northEast), 
-            sw = L.CRS.EPSG3857.project(mapa.getBounds()._southWest),
-            sz = mapa.getSize();
-        marker.id = '_'+(new Date().getTime());
-        if (enableContextInfo) {
-            $.ajax({
-                url: '/maps/getfeatureinfo/'+mg.map.config.mapid+'/',
-                dataType: 'json',
-                data: {
-                    BBOX: sw.x+','+sw.y+','+ne.x+','+ne.y,
-                    I: ev.containerPoint.x,
-                    J: ev.containerPoint.y,
-                    WIDTH: sz.x,
-                    HEIGHT: sz.y
-                },
-                success: function(data) {
-                    if (marker.id == contextMarker.id) {
-                        if (data.count > 0) {
-                            var content='<h3>'+data.layers[0].name+'</h3><ul>';
-                            $.each(data.layers[0].items[0], function(k, v) {
-                                content+='<li><b>'+k+': </b>'+v+'</li>';
-                            });
-                            content+='</ul>';
-                            marker.getPopup().setContent(content);
-                            // marker.getPopup().setContent(self.templateMarkersMenu({ titulo: data.resultados[0].objetos[0].nombre, subtitulo: data.resultados[0].clase, markerClass: 'context', id: -2, latlng: ev.latlng.lat+','+ev.latlng.lng }));
-                        } else {
-                            marker.getPopup().setContent('<p>No se halló información para este punto.</p>');
-                        }
-                    }
-                },
-                timeout: 10000,
-                error: function(e) { 
-                    marker.getPopup().setContent('<p>Se produjo un error al intentar acceder a la información contextual.</p>');                      
-                }
-            });     
-            
-            marker.bindPopup('Buscando información...').openPopup();
-        }
-        marker.on('popupclose', removeContextMarker, this);
-        marker.on('click', removeContextMarker, this);
-        contextMarker = marker;
     }
 
 	return {
@@ -142,20 +82,6 @@ mg.MapApp = (function() {
                         )
                     );
                     
-/*
-                    mapa = L.map(mapDivId, {
-                        crs: crs,
-                        continuousWorld: true,
-                        worldCopyJump: false,
-                        attributionControl: false,
-                        minZoom: 2
-                    }).fitBounds(
-                        L.latLngBounds(
-                            L.latLng(ext[1], ext[0]),
-                            L.latLng(ext[3], ext[2])
-                        )
-                    ); 
-*/
                     var attribution = L.control.attribution({
                         prefix: ''
                     }).addTo(mapa);
@@ -179,14 +105,7 @@ mg.MapApp = (function() {
                     }
                     
                     L.control.scale({imperial: false}).addTo(mapa);
-/*
-                    mapa.addControl(new mg.Abstract(c, '<p class="legend_title">Referencias</p>\
-<img src="/media/'+c.mapid+'_legend.png?t='+Math.floor(Math.random()*100001)+'"/>', { abstract: (params.abstract && params.abstract != 0), title: (params.title && params.title != 0), minimized: (params.refs && params.refs == 0) }));
-*/
-                    // var miniMap = new L.Control.MiniMap(ref_layer, { toggleDisplay: true, minimized: true }).addTo(mapa);
                     
-                    // mapa.on('click', onContextMenu, this);
-
                     // Esto es para evitar que los clicks sobre los elementos flotantes sobre el
                     // mapa sean capturados por el mapa y generen movimientos no previstos        
                     $('.leaflet-control')
@@ -196,7 +115,6 @@ mg.MapApp = (function() {
                 } catch(e) {
                     console.log('Se produjo un error al inicializar el mapa. Revise la configuración.', e);
                 }
-
 
             } else {
                 console.log('Missing configuration mg.map.config');

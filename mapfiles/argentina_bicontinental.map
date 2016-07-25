@@ -49,7 +49,7 @@ MAP
     NAME "paises"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select *, st_transform(wkb_geometry, 98639) as geom_proj from smn_layers.lima) aa using unique ogc_fid using srid=98639"
+    DATA "geom_proj from (select *, st_transform(wkb_geometry, 98639) as geom_proj from smn_layers.lima  where objeto='País' and nam is not null) aa using unique ogc_fid using srid=98639"
     # DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='País' and nam is not null) aa using unique ogc_fid"
     TYPE POLYGON
     GROUP 'default'
@@ -71,7 +71,7 @@ MAP
     NAME "antartida"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select *, st_transform(wkb_geometry, 98639) as geom_proj from smn_layers.lima) aa using unique ogc_fid using srid=98639"
+    DATA "geom_proj from (select *, st_transform(wkb_geometry, 98639) as geom_proj from smn_layers.lima  where objeto='País' and nam is null) aa using unique ogc_fid using srid=98639"
     # DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='País' and nam is null) aa using unique ogc_fid"
     TYPE POLYGON
     GROUP 'default'
@@ -94,7 +94,7 @@ MAP
     NAME "argentina"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='Provincia') aa using unique ogc_fid"
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='Provincia') aa using unique ogc_fid using srid=98639"
     TYPE POLYGON
     GROUP 'default'
     STATUS ON
@@ -111,11 +111,45 @@ MAP
     END
   END # LAYER
 
+
+  LAYER
+    NAME "ferrocarriles"
+    CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
+    CONNECTIONTYPE POSTGIS
+    DATA "wkb_geometry from smn_layers.ferl"
+    TYPE LINE
+    GROUP 'default'
+    STATUS ON
+    PROJECTION
+            'init=epsg:4326'
+    END # PROJECTION
+    PROCESSING 'LABEL_NO_CLIP=ON'
+    PROCESSING 'CLOSE_CONNECTION=DEFER'
+    #SYMBOLSCALEDENOM 8000000
+    MAXSCALEDENOM 4000000 # 
+    CLASS
+		STYLE
+		  #OUTLINECOLOR '#f6f6f6'
+		  COLOR 128 128 128
+		  WIDTH 1
+		  MAXWIDTH 1
+		  MINWIDTH 1
+		END       
+		STYLE
+	      COLOR 128 128 128
+	      SYMBOL "vertline"
+	      SIZE 7
+	      ANGLE 0
+	      GAP -20
+	    END # STYLE		
+    END
+  END # LAYER
+
   LAYER
     NAME "departamentos"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='Departamento') aa using unique ogc_fid"
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='Departamento') aa using unique ogc_fid using srid=98639"
     TYPE POLYGON
     GROUP 'default'
     STATUS ON
@@ -140,7 +174,7 @@ MAP
     NAME "provincias"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='Provincia') aa using unique ogc_fid"
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='Provincia') aa using unique ogc_fid using srid=98639"
     TYPE POLYGON
     GROUP 'default'
     STATUS ON
@@ -149,16 +183,205 @@ MAP
     END # PROJECTION
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'
-    SYMBOLSCALEDENOM 8000000
+    SYMBOLSCALEDENOM 4000000
     CLASS
 		STYLE
 		  OUTLINECOLOR '#f6f6f6'
 		  WIDTH 1
-		  MAXWIDTH 3
+		  MAXWIDTH 2
 		  MINWIDTH 1
 		END       
     END
   END # LAYER
 
+
+  # uso jerarquia media: ca2 in (7,8,9), 2382 registros
+  LAYER
+    NAME "localidades_jerarquias_7_8_9"
+    CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
+    CONNECTIONTYPE POSTGIS
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=0 and ca2 in (7,8,9)) aa using unique ogc_fid using srid=98639"
+    TYPE POINT
+    GROUP 'default'
+    STATUS ON
+    PROJECTION
+            'init=epsg:4326'
+    END # PROJECTION
+    PROCESSING 'LABEL_NO_CLIP=ON'
+    PROCESSING 'CLOSE_CONNECTION=DEFER'
+    SYMBOLSCALEDENOM 8000000
+    MAXSCALEDENOM 1000000
+    CLASS
+		STYLE
+		  SYMBOL "circle"
+		  COLOR 150 150 150
+		  MAXSIZE 4
+		  MAXWIDTH 2
+		  MINSIZE 3
+		  SIZE 3
+    	END # STYLE
+    END
+  END # LAYER
+
+  # uso jerarquia media: ca2 in (5,6), 597 registros
+  LAYER
+    NAME "localidades_jerarquias_5_6"
+    CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
+    CONNECTIONTYPE POSTGIS
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=0 and ca2 in (5,6)) aa using unique ogc_fid using srid=98639"
+    TYPE POINT
+    GROUP 'default'
+    STATUS ON
+    PROJECTION
+            'init=epsg:4326'
+    END # PROJECTION
+    PROCESSING 'LABEL_NO_CLIP=ON'
+    PROCESSING 'CLOSE_CONNECTION=DEFER'
+    SYMBOLSCALEDENOM 8000000
+    MAXSCALEDENOM 2000000
+    CLASS
+		STYLE
+		  SYMBOL "circle"
+		  COLOR 150 150 150
+		  MAXSIZE 5
+		  MAXWIDTH 2
+		  MINSIZE 4
+		  SIZE 4
+    	END # STYLE
+    END
+  END # LAYER
+
+  # ca1=0 no figura en catalogo IGN pero tiene localidades conocidas, como adrogue, monte grande, olivos. uso jerarquia mayor: ca2 in (2,3,4), 44 registros
+  LAYER
+    NAME "localidades_jerarquias_2_3_4"
+    CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
+    CONNECTIONTYPE POSTGIS
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=0 and ca2 in (2,3,4)) aa using unique ogc_fid using srid=98639"
+    TYPE POINT
+    GROUP 'default'
+    STATUS ON
+    PROJECTION
+            'init=epsg:4326'
+    END # PROJECTION
+    PROCESSING 'LABEL_NO_CLIP=ON'
+    PROCESSING 'CLOSE_CONNECTION=DEFER'
+    SYMBOLSCALEDENOM 8000000
+    MAXSCALEDENOM 4000000
+    CLASS
+		STYLE
+		  SYMBOL "circle"
+		  COLOR 150 150 150
+		  MAXSIZE 6
+		  MAXWIDTH 2
+		  MINSIZE 5
+		  SIZE 5
+    	END # STYLE
+    END
+  END # LAYER
+
+
+  #	ca=1 segun IGN: Cabecera de Departamento o Partido:	Ciudad principal desde el punto de vista político administrativo en un partido o comuna.
+  LAYER
+    NAME "partidos"
+    CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
+    CONNECTIONTYPE POSTGIS
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=1) aa using unique ogc_fid using srid=98639"
+    TYPE POINT
+    GROUP 'default'
+    STATUS ON
+    PROJECTION
+            'init=epsg:4326'
+    END # PROJECTION
+    PROCESSING 'LABEL_NO_CLIP=ON'
+    PROCESSING 'CLOSE_CONNECTION=DEFER'
+    SYMBOLSCALEDENOM 8000000
+    MAXSCALEDENOM 4000000 #
+    CLASS
+		STYLE
+		  SYMBOL "circle"
+		  COLOR 150 150 150
+		  MAXSIZE 7
+		  MAXWIDTH 2
+		  MINSIZE 6
+		  SIZE 6
+    	END # STYLE
+    END
+  END # LAYER
+
+
+  LAYER
+    NAME "capitales_provinciales"
+    CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
+    CONNECTIONTYPE POSTGIS
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=2) aa using unique ogc_fid using srid=98639"
+    TYPE POINT
+    GROUP 'default'
+    STATUS ON
+    PROJECTION
+            'init=epsg:4326'
+    END # PROJECTION
+    PROCESSING 'LABEL_NO_CLIP=ON'
+    PROCESSING 'CLOSE_CONNECTION=DEFER'
+    SYMBOLSCALEDENOM 8000000
+    MAXSCALEDENOM 58000000
+    CLASS
+		STYLE
+		  SYMBOL "circle"
+		  #COLOR 150 150 150
+		  OUTLINECOLOR '#75818e'  # el de paises
+		  COLOR '#f8f8f8'        # el de antartida
+		  MAXSIZE 10
+		  MAXWIDTH 2
+		  MINSIZE 8
+		  SIZE 8
+    	END # STYLE
+		STYLE
+		  SYMBOL "circle"
+		  COLOR 150 150 150
+		  MAXSIZE 6
+		  MAXWIDTH 2
+		  MINSIZE 5
+		  SIZE 5
+    	END # STYLE
+    END
+  END # LAYER
+
+
+  LAYER
+    NAME "capital"
+    CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
+    CONNECTIONTYPE POSTGIS
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=3) aa using unique ogc_fid using srid=98639"
+    TYPE POINT
+    GROUP 'default'
+    STATUS ON
+    PROJECTION
+            'init=epsg:4326'
+    END # PROJECTION
+    PROCESSING 'LABEL_NO_CLIP=ON'
+    PROCESSING 'CLOSE_CONNECTION=DEFER'
+    SYMBOLSCALEDENOM 8000000
+    #MAXSCALEDENOM 58000000
+    CLASS
+		STYLE
+		  SYMBOL "circle"
+		  #COLOR 150 150 150
+		  OUTLINECOLOR '#505050'  # el de paises
+		  COLOR '#f8f8f8'        # el de antartida
+		  MAXSIZE 12
+		  MAXWIDTH 2
+		  MINSIZE 10
+		  SIZE 10
+    	END # STYLE
+		STYLE
+		  SYMBOL "circle"
+		  COLOR '#505050'
+		  MAXSIZE 8
+		  MAXWIDTH 2
+		  MINSIZE 7
+		  SIZE 7
+    	END # STYLE
+    END
+  END # LAYER
 
 END

@@ -113,6 +113,81 @@ MAP
 
 
   LAYER
+    NAME "corrientes_de_agua_poligonos"
+    CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
+    CONNECTIONTYPE POSTGIS
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.acoa where objeto='Corriente de agua') aa using unique ogc_fid using srid=98639"
+    TYPE POLYGON
+    GROUP 'default'
+    STATUS ON
+    PROJECTION
+            'init=epsg:4326'
+    END # PROJECTION
+    PROCESSING 'LABEL_NO_CLIP=ON'
+    PROCESSING 'CLOSE_CONNECTION=DEFER'
+    #SYMBOLSCALEDENOM 8000000
+    MAXSCALEDENOM 4000000
+    CLASS
+		STYLE
+		  COLOR '#75818e'
+		  WIDTH 1
+		  MINWIDTH 1
+		  MAXWIDTH 1
+		END
+    END
+  END # LAYER
+
+  LAYER
+    NAME "espejos_de_agua"
+    CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
+    CONNECTIONTYPE POSTGIS
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.acoa where objeto='Espejo de agua') aa using unique ogc_fid using srid=98639"
+    TYPE POLYGON
+    GROUP 'default'
+    STATUS ON
+    PROJECTION
+            'init=epsg:4326'
+    END # PROJECTION
+    PROCESSING 'LABEL_NO_CLIP=ON'
+    PROCESSING 'CLOSE_CONNECTION=DEFER'
+    #SYMBOLSCALEDENOM 8000000
+    MAXSCALEDENOM 2000000 # le pongo lo mismo que rios (lineas) a continuacion
+    CLASS
+		STYLE
+		  COLOR '#75818e'
+		  WIDTH 1
+		  MINWIDTH 1
+		  MAXWIDTH 1
+		END
+    END
+  END # LAYER
+
+  LAYER
+    NAME "corrientes_de_agua_lineas"
+    CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
+    CONNECTIONTYPE POSTGIS
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.acol where objeto='Corriente de agua') aa using unique ogc_fid using srid=98639"
+    TYPE LINE
+    GROUP 'default'
+    STATUS ON
+    PROJECTION
+            'init=epsg:4326'
+    END # PROJECTION
+    PROCESSING 'LABEL_NO_CLIP=ON'
+    PROCESSING 'CLOSE_CONNECTION=DEFER'
+    #SYMBOLSCALEDENOM 8000000
+    MAXSCALEDENOM 2000000
+    CLASS
+		STYLE
+		  COLOR '#75818e'
+		  WIDTH 1
+		  MINWIDTH 1
+		  MAXWIDTH 1
+		END
+    END
+  END # LAYER
+
+  LAYER
     NAME "ferrocarriles"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
@@ -130,13 +205,16 @@ MAP
     CLASS
 		STYLE
 		  #OUTLINECOLOR '#f6f6f6'
-		  COLOR 128 128 128
+		  #COLOR 128 128 128
+		  COLOR '#505050'
+		  #COLOR '#6e6e6e'
 		  WIDTH 1
 		  MAXWIDTH 1
 		  MINWIDTH 1
 		END       
 		STYLE
-	      COLOR 128 128 128
+	      #COLOR '#6e6e6e'
+	      COLOR '#505050'
 	      SYMBOL "vertline"
 	      SIZE 7
 	      ANGLE 0
@@ -144,6 +222,89 @@ MAP
 	    END # STYLE		
     END
   END # LAYER
+
+  LAYER
+    NAME "rutas_nacionales"
+    CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
+    CONNECTIONTYPE POSTGIS
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.via where objeto='Red Vial' and hct=1 and fun=6) aa using unique ogc_fid using srid=98639"
+    TYPE LINE
+    GROUP 'default'
+    STATUS ON
+    PROJECTION
+            'init=epsg:4326'
+    END # PROJECTION
+    PROCESSING 'LABEL_NO_CLIP=ON'
+    PROCESSING 'CLOSE_CONNECTION=DEFER'
+    #SYMBOLSCALEDENOM 8000000
+    MAXSCALEDENOM 4000000
+	OPACITY 60     
+    CLASS
+		STYLE
+		  COLOR '#ec9d18'
+		  WIDTH 2
+		  MINWIDTH 2
+		  MAXWIDTH 2
+		END
+    END
+  END # LAYER
+
+  LAYER
+    NAME "rutas_provinciales"
+    CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
+    CONNECTIONTYPE POSTGIS
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.via where objeto='Red Vial' and hct=2 and fun=6) aa using unique ogc_fid using srid=98639"
+    TYPE LINE
+    GROUP 'default'
+    STATUS ON
+    PROJECTION
+            'init=epsg:4326'
+    END # PROJECTION
+    PROCESSING 'LABEL_NO_CLIP=ON'
+    PROCESSING 'CLOSE_CONNECTION=DEFER'
+    MAXSCALEDENOM 2000000
+    OPACITY 60 
+    CLASS
+		STYLE
+		  COLOR '#ec9d18'
+		  WIDTH 1
+		  MINWIDTH 1
+		  MAXWIDTH 1
+		END
+    END
+
+#   CLASS
+#   	NAME 'cercano'
+#       MAXSCALEDENOM 400000 
+#    	STYLE
+#		  #OUTLINECOLOR '#ecb861'
+#		  COLOR '#ec9d18'
+#		  WIDTH 3
+#		  MAXWIDTH 3
+#		  MINWIDTH 2
+#		END
+#		STYLE
+#		  #OUTLINECOLOR '#ec9d18'
+#		  COLOR '#ecb861'
+#		  WIDTH 2
+#		  MAXWIDTH 2
+#		  MINWIDTH 1
+#		END
+#    END
+#    CLASS
+#    	NAME 'alejado'
+#        MINSCALEDENOM 500000
+#        MAXSCALEDENOM 2000000
+#		STYLE
+#		  #OUTLINECOLOR '#ecb861'
+#		  COLOR 255 255 255
+#		  WIDTH 1
+#		  #MAXWIDTH 2
+#		  #MINWIDTH 1
+#		END
+#    END
+  END # LAYER
+
 
   LAYER
     NAME "departamentos"

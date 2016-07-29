@@ -116,7 +116,7 @@ MAP
     NAME "corrientes_de_agua_poligonos"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.acoa where objeto='Corriente de agua') aa using unique ogc_fid using srid=98639"
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry,fna from smn_layers.acoa where objeto='Corriente de agua') aa using unique ogc_fid using srid=98639"
     TYPE POLYGON
     GROUP 'default'
     STATUS ON
@@ -127,12 +127,33 @@ MAP
     PROCESSING 'CLOSE_CONNECTION=DEFER'
     #SYMBOLSCALEDENOM 8000000
     MAXSCALEDENOM 4000000
+    LABELITEM 'fna'
+    LABELMAXSCALEDENOM 500000
     CLASS
 		STYLE
 		  COLOR '#75818e'
 		  WIDTH 1
 		  MINWIDTH 1
 		  MAXWIDTH 1
+		END
+		LABEL
+			TYPE TRUETYPE
+			FONT "arial"
+			SIZE 6
+			MINSIZE 6
+			MAXSIZE 7
+			POSITION AUTO #CC
+			ANGLE FOLLOW
+			MINFEATURESIZE -1
+			COLOR '#fafafa'
+			OUTLINECOLOR 100 100 100 #'#75818e'
+			#COLOR 60 60 60
+			#OUTLINECOLOR 255 255 255
+			OUTLINEWIDTH 1
+			ANTIALIAS TRUE
+			MINDISTANCE 200
+			FORCE FALSE
+			PARTIALS FALSE
 		END
     END
   END # LAYER
@@ -141,7 +162,7 @@ MAP
     NAME "espejos_de_agua"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.acoa where objeto='Espejo de agua') aa using unique ogc_fid using srid=98639"
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry,fna from smn_layers.acoa where objeto='Espejo de agua') aa using unique ogc_fid using srid=98639"
     TYPE POLYGON
     GROUP 'default'
     STATUS ON
@@ -151,13 +172,34 @@ MAP
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'
     #SYMBOLSCALEDENOM 8000000
-    MAXSCALEDENOM 2000000 # le pongo lo mismo que rios (lineas) a continuacion
+    MAXSCALEDENOM 1000000 # le pongo lo mismo que rios (lineas) a continuacion
+    #LABELITEM 'fna' # esta capa mejor no etiquetarla
+    LABELMAXSCALEDENOM 500000
     CLASS
 		STYLE
 		  COLOR '#75818e'
 		  WIDTH 1
 		  MINWIDTH 1
 		  MAXWIDTH 1
+		END
+		LABEL
+			TYPE TRUETYPE
+			FONT "arial"
+			SIZE 6
+			MINSIZE 6
+			MAXSIZE 7
+			POSITION AUTO #CC
+			ANGLE FOLLOW
+			MINFEATURESIZE -1
+			COLOR '#fafafa'
+			OUTLINECOLOR 100 100 100 #'#75818e'
+			#COLOR 60 60 60
+			#OUTLINECOLOR 255 255 255
+			OUTLINEWIDTH 1
+			ANTIALIAS TRUE
+			MINDISTANCE 200
+			FORCE FALSE
+			PARTIALS FALSE
 		END
     END
   END # LAYER
@@ -166,7 +208,7 @@ MAP
     NAME "corrientes_de_agua_lineas"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.acol where objeto='Corriente de agua') aa using unique ogc_fid using srid=98639"
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry, fna from smn_layers.acol where objeto='Corriente de agua') aa using unique ogc_fid using srid=98639"
     TYPE LINE
     GROUP 'default'
     STATUS ON
@@ -176,7 +218,9 @@ MAP
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'
     #SYMBOLSCALEDENOM 8000000
-    MAXSCALEDENOM 2000000
+    MAXSCALEDENOM 1000000
+    LABELITEM 'fna'
+    LABELMAXSCALEDENOM 500000
     CLASS
 		STYLE
 		  COLOR '#75818e'
@@ -184,6 +228,26 @@ MAP
 		  MINWIDTH 1
 		  MAXWIDTH 1
 		END
+		LABEL
+			TYPE TRUETYPE
+			FONT "arial"
+			SIZE 6
+			MINSIZE 6
+			MAXSIZE 7
+			POSITION AUTO #CC
+			ANGLE FOLLOW
+			MINFEATURESIZE -1
+			COLOR '#fafafa'
+			OUTLINECOLOR 100 100 100 #'#75818e'
+			#COLOR 60 60 60
+			#OUTLINECOLOR 255 255 255
+			OUTLINEWIDTH 1
+			ANTIALIAS TRUE
+			MINDISTANCE 200
+			FORCE FALSE
+			PARTIALS FALSE
+		END
+		
     END
   END # LAYER
 
@@ -227,7 +291,7 @@ MAP
     NAME "rutas_nacionales"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.via where objeto='Red Vial' and hct=1 and fun=6) aa using unique ogc_fid using srid=98639"
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry, nr from smn_layers.via where objeto='Red Vial' and hct=1) aa using unique ogc_fid using srid=98639"
     TYPE LINE
     GROUP 'default'
     STATUS ON
@@ -238,13 +302,33 @@ MAP
     PROCESSING 'CLOSE_CONNECTION=DEFER'
     #SYMBOLSCALEDENOM 8000000
     MAXSCALEDENOM 4000000
-	OPACITY 60     
+	OPACITY 60
+	LABELITEM 'nr'     
+	LABELMAXSCALEDENOM 1000000    
     CLASS
 		STYLE
 		  COLOR '#ec9d18'
 		  WIDTH 2
 		  MINWIDTH 2
 		  MAXWIDTH 2
+		END
+		LABEL
+			PRIORITY 5
+			TYPE TRUETYPE
+			FONT "arial_b"
+			SIZE 7
+			MINSIZE 7
+			MAXSIZE 8
+			POSITION AUTO #CC
+			ANGLE FOLLOW
+			MINFEATURESIZE -1
+			COLOR '#ec9d18'
+			OUTLINECOLOR '#75818e'
+			OUTLINEWIDTH 1
+			ANTIALIAS TRUE
+			MINDISTANCE 200
+			FORCE FALSE
+			PARTIALS FALSE
 		END
     END
   END # LAYER
@@ -253,7 +337,7 @@ MAP
     NAME "rutas_provinciales"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.via where objeto='Red Vial' and hct=2 and fun=6) aa using unique ogc_fid using srid=98639"
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry,nr from smn_layers.via where objeto='Red Vial' and hct=2) aa using unique ogc_fid using srid=98639"
     TYPE LINE
     GROUP 'default'
     STATUS ON
@@ -264,6 +348,8 @@ MAP
     PROCESSING 'CLOSE_CONNECTION=DEFER'
     MAXSCALEDENOM 2000000
     OPACITY 60 
+	LABELITEM 'nr'     
+	LABELMAXSCALEDENOM 500000    
     CLASS
 		STYLE
 		  COLOR '#ec9d18'
@@ -271,6 +357,25 @@ MAP
 		  MINWIDTH 1
 		  MAXWIDTH 1
 		END
+		LABEL
+			PRIORITY 4
+			TYPE TRUETYPE
+			FONT "arial_b"
+			SIZE 7
+			MINSIZE 7
+			MAXSIZE 8
+			POSITION AUTO #CC
+			ANGLE FOLLOW
+			MINFEATURESIZE -1
+			COLOR '#ec9d18'
+			OUTLINECOLOR '#75818e'
+			OUTLINEWIDTH 1
+			ANTIALIAS TRUE
+			MINDISTANCE 200
+			FORCE FALSE
+			PARTIALS FALSE
+		END
+		
     END
 
 #   CLASS
@@ -310,7 +415,7 @@ MAP
     NAME "departamentos"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='Departamento') aa using unique ogc_fid using srid=98639"
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry, fna from smn_layers.lima where objeto='Departamento') aa using unique ogc_fid using srid=98639"
     TYPE POLYGON
     GROUP 'default'
     STATUS ON
@@ -320,14 +425,40 @@ MAP
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'
     MAXSCALEDENOM 8000000 # 8 millones
+    
+    SYMBOLSCALEDENOM 250000
+    LABELITEM 'fna'
+    LABELMAXSCALEDENOM 1000000
+    
     CLASS
         STYLE
             #COLOR '#18739e'
             OUTLINECOLOR '#a4bcbc'
       		WIDTH 1
+      		MINWIDTH 1
+      		MAXWIDTH 1
       		LINECAP butt
       		PATTERN 3 3 3 3 END            
        END
+		LABEL
+			PRIORITY 7
+			TYPE TRUETYPE
+			FONT "arial"
+			SIZE 5
+			MINSIZE 5
+			MAXSIZE 9
+			POSITION AUTO #CC
+			#ANGLE FOLLOW
+			MINFEATURESIZE -1
+			COLOR '#a4bcbc'
+			OUTLINECOLOR 100 100 100 #'#75818e'
+			OUTLINEWIDTH 1
+			ANTIALIAS TRUE
+			#MINDISTANCE 200
+			FORCE FALSE
+			PARTIALS FALSE
+		END
+       
     END
   END # LAYER
 
@@ -361,7 +492,7 @@ MAP
     NAME "localidades_jerarquias_7_8_9"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=0 and ca2 in (7,8,9)) aa using unique ogc_fid using srid=98639"
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry, fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=0 and ca2 in (7,8,9)) aa using unique ogc_fid using srid=98639"
     TYPE POINT
     GROUP 'default'
     STATUS ON
@@ -370,36 +501,12 @@ MAP
     END # PROJECTION
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'
-    SYMBOLSCALEDENOM 8000000
+    #SYMBOLSCALEDENOM 8000000
     MAXSCALEDENOM 1000000
-    CLASS
-		STYLE
-		  SYMBOL "circle"
-		  COLOR 150 150 150
-		  MAXSIZE 4
-		  MAXWIDTH 2
-		  MINSIZE 3
-		  SIZE 3
-    	END # STYLE
-    END
-  END # LAYER
 
-  # uso jerarquia media: ca2 in (5,6), 597 registros
-  LAYER
-    NAME "localidades_jerarquias_5_6"
-    CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
-    CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=0 and ca2 in (5,6)) aa using unique ogc_fid using srid=98639"
-    TYPE POINT
-    GROUP 'default'
-    STATUS ON
-    PROJECTION
-            'init=epsg:4326'
-    END # PROJECTION
-    PROCESSING 'LABEL_NO_CLIP=ON'
-    PROCESSING 'CLOSE_CONNECTION=DEFER'
-    SYMBOLSCALEDENOM 8000000
-    MAXSCALEDENOM 2000000
+    LABELITEM 'fna'
+    LABELMAXSCALEDENOM 750000#250000
+
     CLASS
 		STYLE
 		  SYMBOL "circle"
@@ -409,15 +516,35 @@ MAP
 		  MINSIZE 4
 		  SIZE 4
     	END # STYLE
+		LABEL
+			PRIORITY 3
+			TYPE TRUETYPE
+			FONT "arial"
+			SIZE 7
+			MINSIZE 7
+			MAXSIZE 8
+			POSITION AUTO #CC
+			#ANGLE FOLLOW
+			MINFEATURESIZE -1
+			COLOR '#fafafa'
+			OUTLINECOLOR 100 100 100 #'#75818e'
+			#COLOR 60 60 60
+			#OUTLINECOLOR 255 255 255
+			OUTLINEWIDTH 1
+			ANTIALIAS TRUE
+			#MINDISTANCE 200
+			FORCE FALSE
+			PARTIALS FALSE
+		END
     END
   END # LAYER
 
-  # ca1=0 no figura en catalogo IGN pero tiene localidades conocidas, como adrogue, monte grande, olivos. uso jerarquia mayor: ca2 in (2,3,4), 44 registros
+  # uso jerarquia media: ca2 in (5,6), 597 registros
   LAYER
-    NAME "localidades_jerarquias_2_3_4"
+    NAME "localidades_jerarquias_5_6"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=0 and ca2 in (2,3,4)) aa using unique ogc_fid using srid=98639"
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry,fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=0 and ca2 in (5,6)) aa using unique ogc_fid using srid=98639"
     TYPE POINT
     GROUP 'default'
     STATUS ON
@@ -426,8 +553,12 @@ MAP
     END # PROJECTION
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'
-    SYMBOLSCALEDENOM 8000000
-    MAXSCALEDENOM 4000000
+    #SYMBOLSCALEDENOM 8000000
+    MAXSCALEDENOM 2000000
+
+    LABELITEM 'fna'
+    LABELMAXSCALEDENOM 750000
+
     CLASS
 		STYLE
 		  SYMBOL "circle"
@@ -437,6 +568,74 @@ MAP
 		  MINSIZE 5
 		  SIZE 5
     	END # STYLE
+		LABEL
+			PRIORITY 4
+			TYPE TRUETYPE
+			FONT "arial"
+			SIZE 7
+			MINSIZE 7
+			MAXSIZE 8
+			POSITION AUTO #CC
+			#ANGLE FOLLOW
+			MINFEATURESIZE -1
+			COLOR '#fafafa'
+			OUTLINECOLOR 100 100 100 #'#75818e'
+			OUTLINEWIDTH 1
+			ANTIALIAS TRUE
+			#MINDISTANCE 200
+			FORCE FALSE
+			PARTIALS FALSE
+		END
+    END
+  END # LAYER
+
+  # ca1=0 no figura en catalogo IGN pero tiene localidades conocidas, como adrogue, monte grande, olivos. uso jerarquia mayor: ca2 in (2,3,4), 44 registros
+  LAYER
+    NAME "localidades_jerarquias_2_3_4"
+    CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
+    CONNECTIONTYPE POSTGIS
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry,fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=0 and ca2 in (2,3,4)) aa using unique ogc_fid using srid=98639"
+    TYPE POINT
+    GROUP 'default'
+    STATUS ON
+    PROJECTION
+            'init=epsg:4326'
+    END # PROJECTION
+    PROCESSING 'LABEL_NO_CLIP=ON'
+    PROCESSING 'CLOSE_CONNECTION=DEFER'
+    #SYMBOLSCALEDENOM 8000000
+    MAXSCALEDENOM 4000000
+
+    LABELITEM 'fna'
+    LABELMAXSCALEDENOM 750000
+
+    CLASS
+		STYLE
+		  SYMBOL "circle"
+		  COLOR 150 150 150
+		  MAXSIZE 6
+		  MAXWIDTH 2
+		  MINSIZE 5
+		  SIZE 5
+    	END # STYLE
+		LABEL
+			PRIORITY 5
+			TYPE TRUETYPE
+			FONT "arial"
+			SIZE 7
+			MINSIZE 7
+			MAXSIZE 8
+			POSITION AUTO #CC
+			#ANGLE FOLLOW
+			MINFEATURESIZE -1
+			COLOR '#fafafa'
+			OUTLINECOLOR 100 100 100 #'#75818e'
+			OUTLINEWIDTH 1
+			ANTIALIAS TRUE
+			#MINDISTANCE 200
+			FORCE FALSE
+			PARTIALS FALSE
+		END
     END
   END # LAYER
 
@@ -446,7 +645,7 @@ MAP
     NAME "partidos"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=1) aa using unique ogc_fid using srid=98639"
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry,fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=1) aa using unique ogc_fid using srid=98639"
     TYPE POINT
     GROUP 'default'
     STATUS ON
@@ -455,8 +654,10 @@ MAP
     END # PROJECTION
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'
-    SYMBOLSCALEDENOM 8000000
+    #SYMBOLSCALEDENOM 8000000
     MAXSCALEDENOM 4000000 #
+    LABELITEM 'fna'
+    LABELMAXSCALEDENOM 1000000#250000 #1000000
     CLASS
 		STYLE
 		  SYMBOL "circle"
@@ -466,7 +667,25 @@ MAP
 		  MINSIZE 6
 		  SIZE 6
     	END # STYLE
-    END
+		LABEL
+			PRIORITY 6
+			TYPE TRUETYPE
+			FONT "arial"
+			SIZE 7
+			MINSIZE 7
+			MAXSIZE 8
+			POSITION AUTO #CC
+			#ANGLE FOLLOW
+			MINFEATURESIZE -1
+			COLOR '#fafafa'
+			OUTLINECOLOR 100 100 100 #'#75818e'
+			OUTLINEWIDTH 1
+			ANTIALIAS TRUE
+			#MINDISTANCE 200
+			FORCE FALSE
+			PARTIALS FALSE
+		END
+	END
   END # LAYER
 
 
@@ -474,7 +693,7 @@ MAP
     NAME "capitales_provinciales"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=2) aa using unique ogc_fid using srid=98639"
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry,replace(fna,'San Fernando del Valle de Catamarca','San Fernando|del Valle de Catamarca') as fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=2) aa using unique ogc_fid using srid=98639"
     TYPE POINT
     GROUP 'default'
     STATUS ON
@@ -485,6 +704,8 @@ MAP
     PROCESSING 'CLOSE_CONNECTION=DEFER'
     SYMBOLSCALEDENOM 8000000
     MAXSCALEDENOM 58000000
+    LABELITEM 'fna'
+    LABELMAXSCALEDENOM 20000000
     CLASS
 		STYLE
 		  SYMBOL "circle"
@@ -504,6 +725,25 @@ MAP
 		  MINSIZE 5
 		  SIZE 5
     	END # STYLE
+		LABEL
+			WRAP '|'
+			PRIORITY 7
+			TYPE TRUETYPE
+			FONT "arial"
+			SIZE 8
+			MINSIZE 8
+			MAXSIZE 8
+			POSITION AUTO #LC
+			#ANGLE FOLLOW
+			MINFEATURESIZE -1
+			COLOR  '#f8f8f8'
+		    OUTLINECOLOR '#75818e'
+			OUTLINEWIDTH 1
+			ANTIALIAS TRUE
+			#MINDISTANCE 200
+			FORCE FALSE
+			PARTIALS FALSE
+		END
     END
   END # LAYER
 
@@ -512,7 +752,7 @@ MAP
     NAME "capital"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=3) aa using unique ogc_fid using srid=98639"
+    DATA "wkb_geometry from (select ogc_fid, wkb_geometry, fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=3) aa using unique ogc_fid using srid=98639"
     TYPE POINT
     GROUP 'default'
     STATUS ON
@@ -523,6 +763,9 @@ MAP
     PROCESSING 'CLOSE_CONNECTION=DEFER'
     SYMBOLSCALEDENOM 8000000
     #MAXSCALEDENOM 58000000
+    #LABELITEM 'fna'
+    LABELMAXSCALEDENOM 20000000
+
     CLASS
 		STYLE
 		  SYMBOL "circle"
@@ -542,6 +785,25 @@ MAP
 		  MINSIZE 7
 		  SIZE 7
     	END # STYLE
+		LABEL
+			TEXT 'Buenos Aires'
+			PRIORITY 8
+			TYPE TRUETYPE
+			FONT "arial"
+			SIZE 8
+			MINSIZE 8
+			MAXSIZE 8
+			POSITION AUTO #LC
+			#ANGLE FOLLOW
+			MINFEATURESIZE -1
+			COLOR  '#f8f8f8'
+		    OUTLINECOLOR '#75818e'
+			OUTLINEWIDTH 1
+			ANTIALIAS TRUE
+			#MINDISTANCE 200
+			FORCE FALSE
+			PARTIALS FALSE
+		END
     END
   END # LAYER
 

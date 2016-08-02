@@ -56,6 +56,7 @@ MAP
     STATUS ON
     PROJECTION
             'init=sr-org:8639'
+            #'init=epsg:4326'
     END # PROJECTION
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'
@@ -94,12 +95,12 @@ MAP
     NAME "argentina"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='Provincia') aa using unique ogc_fid using srid=98639"
+    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj from smn_layers.lima where objeto='Provincia') aa using unique ogc_fid using srid=98639"
     TYPE POLYGON
     GROUP 'default'
     STATUS ON
     PROJECTION
-            'init=epsg:4326'
+            'init=sr-org:8639'
     END # PROJECTION
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'
@@ -116,12 +117,12 @@ MAP
     NAME "corrientes_de_agua_poligonos"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry,fna from smn_layers.acoa where objeto='Corriente de agua') aa using unique ogc_fid using srid=98639"
+    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.acoa where objeto='Corriente de agua') aa using unique ogc_fid using srid=98639"
     TYPE POLYGON
     GROUP 'default'
     STATUS ON
     PROJECTION
-            'init=epsg:4326'
+            'init=sr-org:8639'
     END # PROJECTION
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'
@@ -162,12 +163,12 @@ MAP
     NAME "espejos_de_agua"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry,fna from smn_layers.acoa where objeto='Espejo de agua') aa using unique ogc_fid using srid=98639"
+    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.acoa where objeto='Espejo de agua') aa using unique ogc_fid using srid=98639"
     TYPE POLYGON
     GROUP 'default'
     STATUS ON
     PROJECTION
-            'init=epsg:4326'
+            'init=sr-org:8639'
     END # PROJECTION
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'
@@ -208,12 +209,12 @@ MAP
     NAME "corrientes_de_agua_lineas"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry, fna from smn_layers.acol where objeto='Corriente de agua') aa using unique ogc_fid using srid=98639"
+    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.acol where objeto='Corriente de agua') aa using unique ogc_fid using srid=98639"
     TYPE LINE
     GROUP 'default'
     STATUS ON
     PROJECTION
-            'init=epsg:4326'
+            'init=sr-org:8639'
     END # PROJECTION
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'
@@ -255,12 +256,13 @@ MAP
     NAME "ferrocarriles"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from smn_layers.ferl"
+    #DATA "st_transform(wkb_geometry, 98639) as geom_proj from smn_layers.ferl"
+    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj from smn_layers.ferl) aa using unique ogc_fid using srid=98639"
     TYPE LINE
     GROUP 'default'
     STATUS ON
     PROJECTION
-            'init=epsg:4326'
+            'init=sr-org:8639'
     END # PROJECTION
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'
@@ -291,12 +293,12 @@ MAP
     NAME "rutas_nacionales"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry, nr from smn_layers.via where objeto='Red Vial' and hct=1) aa using unique ogc_fid using srid=98639"
+    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, nr from smn_layers.via where objeto='Red Vial' and hct=1) aa using unique ogc_fid using srid=98639"
     TYPE LINE
     GROUP 'default'
     STATUS ON
     PROJECTION
-            'init=epsg:4326'
+            'init=sr-org:8639'
     END # PROJECTION
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'
@@ -337,12 +339,12 @@ MAP
     NAME "rutas_provinciales"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry,nr from smn_layers.via where objeto='Red Vial' and hct=2) aa using unique ogc_fid using srid=98639"
+    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, nr from smn_layers.via where objeto='Red Vial' and hct=2) aa using unique ogc_fid using srid=98639"
     TYPE LINE
     GROUP 'default'
     STATUS ON
     PROJECTION
-            'init=epsg:4326'
+            'init=sr-org:8639'
     END # PROJECTION
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'
@@ -415,12 +417,12 @@ MAP
     NAME "departamentos"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry, fna from smn_layers.lima where objeto='Departamento') aa using unique ogc_fid using srid=98639"
+    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.lima where objeto='Departamento') aa using unique ogc_fid using srid=98639"
     TYPE POLYGON
     GROUP 'default'
     STATUS ON
     PROJECTION
-            'init=epsg:4326'
+            'init=sr-org:8639'
     END # PROJECTION
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'
@@ -466,12 +468,12 @@ MAP
     NAME "provincias"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='Provincia') aa using unique ogc_fid using srid=98639"
+    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj from smn_layers.lima where objeto='Provincia') aa using unique ogc_fid using srid=98639"
     TYPE POLYGON
     GROUP 'default'
     STATUS ON
     PROJECTION
-            'init=epsg:4326'
+            'init=sr-org:8639'
     END # PROJECTION
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'
@@ -492,12 +494,12 @@ MAP
     NAME "localidades_jerarquias_7_8_9"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry, fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=0 and ca2 in (7,8,9)) aa using unique ogc_fid using srid=98639"
+    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=0 and ca2 in (7,8,9)) aa using unique ogc_fid using srid=98639"
     TYPE POINT
     GROUP 'default'
     STATUS ON
     PROJECTION
-            'init=epsg:4326'
+            'init=sr-org:8639'
     END # PROJECTION
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'
@@ -544,12 +546,12 @@ MAP
     NAME "localidades_jerarquias_5_6"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry,fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=0 and ca2 in (5,6)) aa using unique ogc_fid using srid=98639"
+    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=0 and ca2 in (5,6)) aa using unique ogc_fid using srid=98639"
     TYPE POINT
     GROUP 'default'
     STATUS ON
     PROJECTION
-            'init=epsg:4326'
+            'init=sr-org:8639'
     END # PROJECTION
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'
@@ -594,12 +596,12 @@ MAP
     NAME "localidades_jerarquias_2_3_4"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry,fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=0 and ca2 in (2,3,4)) aa using unique ogc_fid using srid=98639"
+    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=0 and ca2 in (2,3,4)) aa using unique ogc_fid using srid=98639"
     TYPE POINT
     GROUP 'default'
     STATUS ON
     PROJECTION
-            'init=epsg:4326'
+            'init=sr-org:8639'
     END # PROJECTION
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'
@@ -645,12 +647,12 @@ MAP
     NAME "partidos"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry,fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=1) aa using unique ogc_fid using srid=98639"
+    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=1) aa using unique ogc_fid using srid=98639"
     TYPE POINT
     GROUP 'default'
     STATUS ON
     PROJECTION
-            'init=epsg:4326'
+            'init=sr-org:8639'
     END # PROJECTION
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'
@@ -693,12 +695,12 @@ MAP
     NAME "capitales_provinciales"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry,replace(fna,'San Fernando del Valle de Catamarca','San Fernando|del Valle de Catamarca') as fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=2) aa using unique ogc_fid using srid=98639"
+    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, replace(fna,'San Fernando del Valle de Catamarca','San Fernando|del Valle de Catamarca') as fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=2) aa using unique ogc_fid using srid=98639"
     TYPE POINT
     GROUP 'default'
     STATUS ON
     PROJECTION
-            'init=epsg:4326'
+            'init=sr-org:8639'
     END # PROJECTION
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'
@@ -752,12 +754,12 @@ MAP
     NAME "capital"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "wkb_geometry from (select ogc_fid, wkb_geometry, fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=3) aa using unique ogc_fid using srid=98639"
+    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=3) aa using unique ogc_fid using srid=98639"
     TYPE POINT
     GROUP 'default'
     STATUS ON
     PROJECTION
-            'init=epsg:4326'
+            'init=sr-org:8639'
     END # PROJECTION
     PROCESSING 'LABEL_NO_CLIP=ON'
     PROCESSING 'CLOSE_CONNECTION=DEFER'

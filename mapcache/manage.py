@@ -52,15 +52,11 @@ def _add(maps):
 		params = m.split(':')
 		mapa = params[0]
 		if len(params) > 1:
-			capa = params[1]
-		else:
-			capa = mapa
-		if len(params) > 2:
-			srid = params[2]
+			srid = params[1]
 		else:
 			srid = default_srid
-		if len(params) > 3:
-			sld = ':'.join(params[3:])
+		if len(params) > 2:
+			sld = ':'.join(params[2:])
 			sld_hash = sld.split('$')
 			if len(sld_hash) > 1:
 				sld_id = '$'+sld_hash[1]

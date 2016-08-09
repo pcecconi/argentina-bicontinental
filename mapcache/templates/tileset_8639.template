@@ -1,0 +1,8 @@
+<tileset name="${mapname}">
+	<source>${mapname}</source>
+	<cache>${mapname}</cache>
+	<grid>argentina-bicontinental-stere</grid>
+	<format>PNG</format>
+	<metabuffer>10</metabuffer>
+	<expires>86400</expires>
+</tileset>

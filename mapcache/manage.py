@@ -78,7 +78,7 @@ def _add(maps):
 				with open(os.path.join(MAPCACHE_TEMPLATES_DIR, src_template), 'r') as file:
 					template=Template(file.read())
 					d['mapfile'] = mapa
-					d['layers'] = capa
+					d['layers'] = mapa					
 					d['sld'] = sld
 					d['mapserver_url'] = MAPSERVER_URL
 					root.append(ET.fromstring(template.substitute(d)))

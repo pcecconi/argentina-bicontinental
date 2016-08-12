@@ -112,12 +112,35 @@ MAP
     END
   END # LAYER
 
+  LAYER
+    NAME "triangulo"
+    CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
+    CONNECTIONTYPE POSTGIS
+    DATA "geom_proj from (select ogc_fid, st_transform(ST_Line_SubString(wkb_geometry,0.001,0.999), 98639) as geom_proj from smn_layers.liml where ogc_fid = 2701) aa using unique ogc_fid using srid=98639"
+    TYPE LINE
+    GROUP 'default'
+    STATUS ON
+    PROJECTION
+            'init=sr-org:8639'
+    END # PROJECTION
+    PROCESSING 'LABEL_NO_CLIP=ON'
+    PROCESSING 'CLOSE_CONNECTION=DEFER'
+    SYMBOLSCALEDENOM 4000000
+    CLASS
+		STYLE
+          COLOR '#75818e'
+		  WIDTH 1
+		  MAXWIDTH 2
+		  MINWIDTH 1
+		END       
+    END
+  END # LAYER
 
   LAYER
     NAME "corrientes_de_agua_poligonos"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.acoa where objeto='Corriente de agua') aa using unique ogc_fid using srid=98639"
+    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.acoa where objeto='Corriente de agua' and hyp!=2) aa using unique ogc_fid using srid=98639"
     TYPE POLYGON
     GROUP 'default'
     STATUS ON
@@ -132,7 +155,7 @@ MAP
     LABELMAXSCALEDENOM 500000
     CLASS
 		STYLE
-		  COLOR '#75818e'
+		  COLOR '#22a3e0'#'#75818e'
 		  WIDTH 1
 		  MINWIDTH 1
 		  MAXWIDTH 1
@@ -163,7 +186,7 @@ MAP
     NAME "espejos_de_agua"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.acoa where objeto='Espejo de agua') aa using unique ogc_fid using srid=98639"
+    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.acoa where objeto='Espejo de agua' and hyp!=2) aa using unique ogc_fid using srid=98639"
     TYPE POLYGON
     GROUP 'default'
     STATUS ON
@@ -178,7 +201,7 @@ MAP
     LABELMAXSCALEDENOM 500000
     CLASS
 		STYLE
-		  COLOR '#75818e'
+		  COLOR '#22a3e0'#'#75818e'
 		  WIDTH 1
 		  MINWIDTH 1
 		  MAXWIDTH 1
@@ -209,7 +232,7 @@ MAP
     NAME "corrientes_de_agua_lineas"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.acol where objeto='Corriente de agua') aa using unique ogc_fid using srid=98639"
+    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.acol where objeto='Corriente de agua' and hyp!=2) aa using unique ogc_fid using srid=98639"
     TYPE LINE
     GROUP 'default'
     STATUS ON
@@ -224,7 +247,7 @@ MAP
     LABELMAXSCALEDENOM 500000
     CLASS
 		STYLE
-		  COLOR '#75818e'
+		  COLOR '#22a3e0'#'#75818e'
 		  WIDTH 1
 		  MINWIDTH 1
 		  MAXWIDTH 1

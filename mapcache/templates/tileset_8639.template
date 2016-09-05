@@ -1,7 +1,7 @@
 <tileset name="${mapname}">
 	<source>${mapname}</source>
 	<cache>${mapname}</cache>
-	<grid>argentina-bicontinental-stere</grid>
+	<grid>argentina-bicontinental</grid>
 	<format>PNG</format>
 	<metabuffer>10</metabuffer>
 	<expires>86400</expires>

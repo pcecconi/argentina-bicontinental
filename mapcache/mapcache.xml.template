@@ -99,6 +99,17 @@
 	   <resolutions>78125 39062.5 19531.25 9765.625 4882.8125 2441.40625 1220.703125 610.3515625 305.17578125 152.587890625 76.2939453125 38.1469726562 19.0734863281 9.53674316406</resolutions>
 	</grid>
 
+	<grid name="argentina-bicontinental">
+	   <metadata>
+	     <title>Argentina Bicontinental Estereografica</title>
+	   </metadata>
+	   <extent>-10000000 -7000000 9000000 9000000</extent>
+	   <srs>EPSG:98639</srs>
+	   <units>m</units>
+	   <size>256 256</size>
+	   <resolutions>78125 39062.5 19531.25 9765.625 4882.8125 2441.40625 1220.703125 610.3515625 305.17578125 152.587890625 76.2939453125 38.1469726562 19.0734863281 9.53674316406</resolutions>
+	</grid>
+
    <cache name="disk" type="disk">
       <base>/tmp</base>
       <symlink_blank />

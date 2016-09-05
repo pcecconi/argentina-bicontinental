@@ -10,22 +10,48 @@ from settings import MAPSERVER_URL
 import simpleflock
 # from django.conf import settings
 
-uso = "\nUso: manage add|remove|mk_preview <mapname>[:<srid>] [ <mapname>[:srid] .. <mapname>[:srid] ]\n"
+uso = "\nUso: manage add|remove|list|seed|reseed|mk_preview <mapname>[:<srid>] [ <mapname>[:srid] .. <mapname>[:srid] ]\n"
 curr_dir = os.path.dirname(os.path.abspath(__file__))
 MAPCACHE_CONFIG = os.path.join(curr_dir, 'mapcache.xml')
-print MAPCACHE_CONFIG
 MAPCACHE_TEMPLATES_DIR = os.path.join(curr_dir, 'templates')
 map_path = os.path.join(os.path.abspath(os.path.join(curr_dir, os.pardir)), 'mapfiles')
 cache_path = os.path.join(curr_dir, 'cache')
 default_srid = '3857'
-preview_dir = os.path.join(os.path.abspath(os.path.join(curr_dir, os.pardir)), 'MapGround/media/maps_prev')
+preview_dir = map_path
+
+def getDefinedMaps():
+	tree = ET.parse(MAPCACHE_CONFIG)
+	root = tree.getroot()
+	defined_maps=[]
+	for child in root.findall("tileset"):
+		defined_maps.append(child.attrib['name'])
+	return defined_maps	
+
+def seed(maps, min_level, max_level, force):
+	defined_maps=getDefinedMaps()
+	for arg in maps:
+		params = arg.split(':')
+		mapa = params[0]
+		if len(params) == 2:
+			max_level = params[1]
+		if len(params) == 3:
+			min_level = params[1]
+			max_level = params[2]
+		if mapa in defined_maps:
+			print 'Seeding %s from %s to %s...'%(mapa, min_level, max_level)
+			if force:
+				mapa = mapa+' -f'
+			# call('sudo rm /tmp/map-error.log', shell=True)
+			call('sudo mapcache_seed -c mapcache.xml -t '+mapa+' -z %s,%s -n 4'%(min_level, max_level), shell=True)
+		else:
+			print '\nError: No se encontró '+arg+' en los mapas definidos.\n'	
 
 def gen_preview(mapa):
-	print '\nMaking preview image for map: '+mapa+'.map\n'
-	mapa_grande = os.path.join(preview_dir, mapa+'-grande.png')
+	print '\nMaking preview image for map: %s.map at %s\n'%(mapa, preview_dir)
+	mapa_grande = os.path.join(preview_dir, mapa+'.png')
 	call('shp2img -m '+os.path.join(map_path, mapa+'.map')+' -o '+mapa_grande, shell=True)
-	call('convert '+mapa_grande+' -resize 66% '+os.path.join(preview_dir, mapa+'-medio.png'), shell=True)
-	call('convert '+mapa_grande+' -resize 33% '+os.path.join(preview_dir, mapa+'.png'), shell=True)
+	# call('convert '+mapa_grande+' -resize 66% '+os.path.join(preview_dir, mapa+'-medio.png'), shell=True)
+	# call('convert '+mapa_grande+' -resize 33% '+os.path.join(preview_dir, mapa+'.png'), shell=True)
 
 def remove(maps):
 	tree = ET.parse(MAPCACHE_CONFIG)
@@ -107,11 +133,17 @@ def add(maps):
 	except:
 		print "Mapcache filelock!"
 
+def list():
+	defined_maps = getDefinedMaps()
+	print '- '+'\n- '.join(defined_maps)
+
 #elif sys.argv[1]=='seed':
 #	call('mapcache_seed -c /usr/local/usig/mapcache/mapcache.xml -t '+mapa+' -z 0,4 -n 4', shell=True)
 #	call('mapcache_seed -c /usr/local/usig/mapcache/mapcache.xml -t '+mapa+' -z 4,9 -n 4 -e 92000,90500,113500,112000', shell=True)
 
 def mk_preview(maps):
+	tree = ET.parse(MAPCACHE_CONFIG)
+	root = tree.getroot()
 	for m in maps:
 		params = m.split(':')
 		mapa = params[0]
@@ -127,11 +159,10 @@ def mk_preview(maps):
 if len(sys.argv) > 1:
 	op = sys.argv[1]
 else:
-	op = ''
+	op = 'help'
 
 if op == 'help':
     print uso
-    print MAPSERVER_URL
     exit(-1)
 
 if len(sys.argv) >= 2:
@@ -140,7 +171,14 @@ if len(sys.argv) >= 2:
 		remove(maps)
 	elif op == 'add':
 		add(maps)
+	elif op == 'list':
+		list()
+	elif op == 'seed':
+		seed(maps, 0, 14, False)
+	elif op == 'reseed':
+		seed(maps, 0, 14, True)
 	elif op == 'mk_preview':
 		mk_preview(maps)
 	else:
-		pass
+		print uso
+		exit(-1)

@@ -49,8 +49,7 @@ MAP
     NAME "paises"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select *, st_transform(wkb_geometry, 98639) as geom_proj from smn_layers.lima  where objeto='País' and nam is not null) aa using unique ogc_fid using srid=98639"
-    # DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='País' and nam is not null) aa using unique ogc_fid"
+    DATA "geom from (select * from smn_layers_98639.lima  where objeto='País' and nam is not null) aa using unique ogc_fid using srid=98639"
     TYPE POLYGON
     GROUP 'default'
     STATUS ON
@@ -72,8 +71,7 @@ MAP
     NAME "antartida"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select *, st_transform(wkb_geometry, 98639) as geom_proj from smn_layers.lima  where objeto='País' and nam is null) aa using unique ogc_fid using srid=98639"
-    # DATA "wkb_geometry from (select ogc_fid, wkb_geometry from smn_layers.lima where objeto='País' and nam is null) aa using unique ogc_fid"
+    DATA "geom from (select * from smn_layers_98639.lima  where objeto='País' and nam is null) aa using unique ogc_fid using srid=98639"
     TYPE POLYGON
     GROUP 'default'
     STATUS ON
@@ -95,7 +93,7 @@ MAP
     NAME "argentina"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj from smn_layers.lima where objeto='Provincia') aa using unique ogc_fid using srid=98639"
+    DATA "geom from (select ogc_fid, geom from smn_layers_98639.lima where objeto='Provincia') aa using unique ogc_fid using srid=98639"
     TYPE POLYGON
     GROUP 'default'
     STATUS ON
@@ -116,7 +114,7 @@ MAP
     NAME "triangulo"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select ogc_fid, st_transform(ST_Line_SubString(wkb_geometry,0.001,0.999), 98639) as geom_proj from smn_layers.liml where ogc_fid = 2701) aa using unique ogc_fid using srid=98639"
+    DATA "geom from (select ogc_fid, geom from smn_layers_98639.liml where ogc_fid = 2701) aa using unique ogc_fid using srid=98639"
     TYPE LINE
     GROUP 'default'
     STATUS ON
@@ -140,7 +138,7 @@ MAP
     NAME "corrientes_de_agua_poligonos"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.acoa where objeto='Corriente de agua' and hyp!=2) aa using unique ogc_fid using srid=98639"
+    DATA "geom from (select ogc_fid, geom, fna from smn_layers_98639.acoa where objeto='Corriente de agua' and hyp!=2) aa using unique ogc_fid using srid=98639"
     TYPE POLYGON
     GROUP 'default'
     STATUS ON
@@ -186,7 +184,7 @@ MAP
     NAME "espejos_de_agua"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.acoa where objeto='Espejo de agua' and hyp!=2) aa using unique ogc_fid using srid=98639"
+    DATA "geom from (select ogc_fid, geom, fna from smn_layers_98639.acoa where objeto='Espejo de agua' and hyp!=2) aa using unique ogc_fid using srid=98639"
     TYPE POLYGON
     GROUP 'default'
     STATUS ON
@@ -232,7 +230,7 @@ MAP
     NAME "corrientes_de_agua_lineas"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.acol where objeto='Corriente de agua' and hyp!=2) aa using unique ogc_fid using srid=98639"
+    DATA "geom from (select ogc_fid, geom, fna from smn_layers_98639.acol where objeto='Corriente de agua' and hyp!=2) aa using unique ogc_fid using srid=98639"
     TYPE LINE
     GROUP 'default'
     STATUS ON
@@ -279,8 +277,7 @@ MAP
     NAME "ferrocarriles"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    #DATA "st_transform(wkb_geometry, 98639) as geom_proj from smn_layers.ferl"
-    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj from smn_layers.ferl) aa using unique ogc_fid using srid=98639"
+    DATA "geom from (select ogc_fid, geom from smn_layers_98639.ferl) aa using unique ogc_fid using srid=98639"
     TYPE LINE
     GROUP 'default'
     STATUS ON
@@ -316,7 +313,7 @@ MAP
     NAME "rutas_nacionales"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, nr from smn_layers.via where objeto='Red Vial' and hct=1) aa using unique ogc_fid using srid=98639"
+    DATA "geom from (select ogc_fid, geom, nr from smn_layers_98639.via where objeto='Red Vial' and hct=1) aa using unique ogc_fid using srid=98639"
     TYPE LINE
     GROUP 'default'
     STATUS ON
@@ -362,7 +359,7 @@ MAP
     NAME "rutas_provinciales"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, nr from smn_layers.via where objeto='Red Vial' and hct=2) aa using unique ogc_fid using srid=98639"
+    DATA "geom from (select ogc_fid, geom, nr from smn_layers_98639.via where objeto='Red Vial' and hct=2) aa using unique ogc_fid using srid=98639"
     TYPE LINE
     GROUP 'default'
     STATUS ON
@@ -440,7 +437,7 @@ MAP
     NAME "departamentos"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.lima where objeto='Departamento') aa using unique ogc_fid using srid=98639"
+    DATA "geom from (select ogc_fid, geom, fna from smn_layers_98639.lima where objeto='Departamento') aa using unique ogc_fid using srid=98639"
     TYPE POLYGON
     GROUP 'default'
     STATUS ON
@@ -491,7 +488,7 @@ MAP
     NAME "provincias"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj from smn_layers.lima where objeto='Provincia') aa using unique ogc_fid using srid=98639"
+    DATA "geom from (select ogc_fid, geom from smn_layers_98639.lima where objeto='Provincia') aa using unique ogc_fid using srid=98639"
     TYPE POLYGON
     GROUP 'default'
     STATUS ON
@@ -517,7 +514,7 @@ MAP
     NAME "localidades_jerarquias_7_8_9"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=0 and ca2 in (7,8,9)) aa using unique ogc_fid using srid=98639"
+    DATA "geom from (select ogc_fid, geom, fna from smn_layers_98639.aedp where objeto='Asentamiento Humano' and ca1=0 and ca2 in (7,8,9)) aa using unique ogc_fid using srid=98639"
     TYPE POINT
     GROUP 'default'
     STATUS ON
@@ -569,7 +566,7 @@ MAP
     NAME "localidades_jerarquias_5_6"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=0 and ca2 in (5,6)) aa using unique ogc_fid using srid=98639"
+    DATA "geom from (select ogc_fid, geom, fna from smn_layers_98639.aedp where objeto='Asentamiento Humano' and ca1=0 and ca2 in (5,6)) aa using unique ogc_fid using srid=98639"
     TYPE POINT
     GROUP 'default'
     STATUS ON
@@ -619,7 +616,7 @@ MAP
     NAME "localidades_jerarquias_2_3_4"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=0 and ca2 in (2,3,4)) aa using unique ogc_fid using srid=98639"
+    DATA "geom from (select ogc_fid, geom, fna from smn_layers_98639.aedp where objeto='Asentamiento Humano' and ca1=0 and ca2 in (2,3,4)) aa using unique ogc_fid using srid=98639"
     TYPE POINT
     GROUP 'default'
     STATUS ON
@@ -670,7 +667,7 @@ MAP
     NAME "partidos"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=1) aa using unique ogc_fid using srid=98639"
+    DATA "geom from (select ogc_fid, geom, fna from smn_layers_98639.aedp where objeto='Asentamiento Humano' and ca1=1) aa using unique ogc_fid using srid=98639"
     TYPE POINT
     GROUP 'default'
     STATUS ON
@@ -718,7 +715,7 @@ MAP
     NAME "capitales_provinciales"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, replace(fna,'San Fernando del Valle de Catamarca','San Fernando|del Valle de Catamarca') as fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=2) aa using unique ogc_fid using srid=98639"
+    DATA "geom from (select ogc_fid, geom, replace(fna,'San Fernando del Valle de Catamarca','San Fernando|del Valle de Catamarca') as fna from smn_layers_98639.aedp where objeto='Asentamiento Humano' and ca1=2) aa using unique ogc_fid using srid=98639"
     TYPE POINT
     GROUP 'default'
     STATUS ON
@@ -777,7 +774,7 @@ MAP
     NAME "capital"
     CONNECTION "host='gisdb' dbname='smn' user='smn' password='asdfp'"
     CONNECTIONTYPE POSTGIS
-    DATA "geom_proj from (select ogc_fid, st_transform(wkb_geometry, 98639) as geom_proj, fna from smn_layers.aedp where objeto='Asentamiento Humano' and ca1=3) aa using unique ogc_fid using srid=98639"
+    DATA "geom from (select ogc_fid, geom, fna from smn_layers_98639.aedp where objeto='Asentamiento Humano' and ca1=3) aa using unique ogc_fid using srid=98639"
     TYPE POINT
     GROUP 'default'
     STATUS ON
